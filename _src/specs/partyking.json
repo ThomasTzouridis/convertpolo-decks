@@ -1,23 +1,33 @@
 {
   "slug": "partyking",
   "lead_name": "Johan Lingvall",
+  "lead_meta": "Partyking AB",
   "company": "Partyking",
   "domain": "partykungen.se",
   "website": "https://www.partykungen.se",
   "shot": "home.jpg",
-  "cover_line": "A short look at partykungen.se and where we would start.",
-  "saw": {
-    "paragraphs": [
-      "Around 580,000 visits a month, about a third of them paid.",
-      "People spend two minutes and look at three pages per visit, which means most of them arrive knowing what they want and go looking for it. What happens after that, we can only see from the inside."
-    ],
-    "stats": [["580,432", "Monthly visits"], ["30.7%", "Paid traffic"], ["3.18", "Pages per visit"], ["45.2%", "Bounce rate"]],
-    "source": "Source: Similarweb, June 2026.",
-    "shot_caption": "partykungen.se, October 2026"
+  "cover_title": "533,000 people visit your store every month.",
+  "cover_sub": "The next win is not more of them, it is converting the ones already there. A short look at partykungen.se from the outside, what happened at brands in a similar position, and where we would start with you.",
+  "outside": {
+    "stats": [["533K", "Monthly visits", "down from 580K in June"], ["44.3%", "Bounce rate", "roughly 4 in 10 leave immediately"], ["3.3", "Pages per visit", "people browse before they buy"], ["1:19", "Time on site", "real shopping intent"]],
+    "text": "This is the profile of a store whose traffic problem is largely solved, and almost a third of it is rented. At this volume, conversion is the highest-leverage number you own: a lift of 0.25 points in conversion rate is roughly 1,300 additional orders every month, from visitors you already earned and paid for.",
+    "sources": [["Organic search", 37.2], ["Paid search and display", 31.5], ["Direct", 22.2], ["Email and referrals", 4.1], ["Social", 3.9]],
+    "source": "Similarweb, July 2026"
   },
-  "ideas": [
-    {"head": "Shop by theme", "lines": ["Most visitors come for an occasion, not a product. Right now they have to find the costume, the decoration and the tableware separately.", "We would test theme pages that put everything for one occasion on one page and measure revenue per visitor."]},
-    {"head": "Landing pages for paid traffic", "lines": ["A third of the traffic is paid and most of it lands on generic category pages.", "We would test landing pages that match the search people came from and measure the conversion rate of paid sessions."]}
+  "fronts": [
+    {"head": "One story, not three", "text": "A visitor lands on partykungen.se without one clear reason to buy today. Costumes, Oktoberfest gear and gifts all compete for the same front page. The Anothersole program (+185% revenue) fixed exactly this: one guided path per visit intent instead of a homepage trying to be three stores at once."},
+    {"head": "Nothing on the page says now", "text": "There is no stock count, countdown or seasonal deadline anywhere on the site, even though your calendar is date-driven: Oktoberfest, Halloween, New Year. Sparify added scarcity nudges and grew revenue 52%. A live countdown on your seasonal categories is the same lever, and you already have the occasions to hang it on."},
+    {"head": "The list nobody is building", "text": "Email brings in 1.0% of your visits and there is no capture step anywhere on the homepage. Beyond by Vera added a timed recovery popup and grew buy-now clicks 270%. Even a simple first-visit offer would start turning some of your 533K monthly visitors into a list you own instead of traffic you keep renting."}
   ],
-  "booking_url": "https://calendly.com/anirban-convertpolo"
+  "proof": {
+    "title": "What this looks like when it works",
+    "intro": "We have run conversion programs for 100+ brands. These three started roughly where you are: healthy traffic, a big catalog, and a store that converted less than it should.",
+    "cases": [
+      {"img": "anothersole_big.jpg", "name": "Anothersole", "lift": "+185%", "metric": "Revenue", "text": "Footwear D2C. We rebuilt product discovery and the shopping journey so visitors found the right product faster, and bought it.", "url": "https://convertpolo.com/casestudies/anothersole-product-discovery-improvement/"},
+      {"img": "sparify_big.png", "name": "Sparify", "lift": "+52%", "metric": "Revenue", "text": "Motorcycle gear, 70,000 riders strong. Spec-led product pages, delivery dates and scarcity nudges turned browsers into buyers who did not wait.", "url": "https://convertpolo.com/casestudy/"},
+      {"img": "beyondbyvera_big.png", "name": "Beyond by Vera", "lift": "+53%", "metric": "Conversion", "text": "Premium fashion. A slide-out cart drawer and a timed recovery popup (+270% buy-now clicks) turned near-miss visitors into checkouts, without a single discount.", "url": "https://convertpolo.com/casestudies/beyond-by-vera/"}
+    ]
+  },
+  "talk_text": "Thirty minutes on what this would look like on partykungen.se. Your first number is already 533,000 a month, and roughly a third of it is bought media. Every experiment that wins makes that spend work harder, permanently.",
+  "booking_url": "https://calendly.com/ansuya-convertpolo/30min"
 }
