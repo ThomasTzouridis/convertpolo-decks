@@ -1,0 +1,23 @@
+{
+  "slug": "partyking",
+  "lead_name": "Johan Lingvall",
+  "first_name": "Johan",
+  "company": "Partyking",
+  "domain": "partykungen.se",
+  "website": "https://www.partykungen.se",
+  "shot": "home.jpg",
+  "saw": {
+    "paragraphs": [
+      "580,432 visits a month, and 30.7% of them are bought through paid search and display.",
+      "3.18 pages and 2:04 a visit. People arrive with a date and a theme in mind and go looking for the pieces. How many of those sessions end in a cart, we cannot see from outside."
+    ],
+    "stats": [["580,432", "Monthly visits"], ["30.7%", "Paid traffic"], ["3.18", "Pages per visit"], ["45.2%", "Bounce rate"]],
+    "source": "Source: Similarweb, June 2026.",
+    "shot_caption": "partykungen.se, today"
+  },
+  "ideas": [
+    {"head": "Theme first discovery", "hypothesis": "Visitors who arrive with a party theme buy more when every piece of that theme sits on one page.", "change": "Theme pages that bundle costume, decoration and tableware, linked from the homepage and search.", "metric": "Revenue per visitor against a live control."},
+    {"head": "Paid traffic landing pages", "hypothesis": "A bought visit converts better when the page matches the search it came from.", "change": "Landing pages matched to the main paid search themes instead of the generic category page.", "metric": "Conversion rate of paid sessions against a live control."}
+  ],
+  "booking_url": "https://calendly.com/anirban-convertpolo"
+}
