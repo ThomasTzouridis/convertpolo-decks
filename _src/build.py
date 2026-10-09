@@ -10,6 +10,7 @@ slug = spec["slug"]; company = spec["company"]; esc = H.escape
 STEPS = [("Research","Analytics, session recordings, voice of customer"),("Hypotheses","Ranked by expected impact and speed"),("Design and build","Our designers and developers, not your roadmap"),
          ("QA and launch","Every test verified before a visitor sees it"),("Analyze","Statistical significance, not gut feeling"),("Iterate","Winners roll out, learnings feed the next test")]
 TEAM = [("anirban","Anirban Chakraborty","Founder & CEO"),("saurabh","Saurabh Patwa","Co-Founder"),("ansuya","Ansuya Poudel","Brand & Growth"),("ankita","Ankita Daga","UX UI Design Lead")]
+WALL = ["l1","l2","l3","l4","l5","l6","l7","l8","l9","l11","l12","l14","l15","l16","l17","l18","l19","l113"]
 CLIENTS = ["l1","l2","l11","l12","l14","l15","l16","l17","l18","l19","l113"]
 
 def foot(): return '<div class="foot"><img src="../assets/logo.svg" alt="ConvertPolo"><span>convertpolo.com</span></div>'
@@ -34,13 +35,14 @@ slides = [
   <div class="brand"><img src="../assets/logo.svg" alt="ConvertPolo"><i></i>{lead_logo}</div>
   <div class="cv"><p class="pre">Prepared for {esc(spec["lead_name"])}, {esc(spec["lead_meta"])}</p><h1>{esc(spec["cover_title"])}</h1><p class="sub">{esc(spec["cover_sub"])}</p></div>
   <div class="hero">{shot}</div></div>{foot()}</section>''',
- slide(f'<h2>{esc(spec["domain"])}, from the outside</h2><div class="two"><div><div class="stats">{stats}</div><p class="lead">{o["text"]}</p></div><div class="bars"><p class="lab">Where the visitors come from</p>{bars}<p class="src">{esc(o["source"])}</p></div></div>'),
+ slide(f'<h2>{esc(spec["domain"])} today</h2><div class="two"><div><div class="stats">{stats}</div><p class="lead">{o["text"]}</p></div><div class="bars"><p class="lab">Where the visitors come from</p>{bars}<p class="src">{esc(o["source"])}</p></div></div>'),
  slide(f'<h2>Where we would start</h2><div class="fronts">{fronts}</div>'),
  slide(f'<h2>{esc(proof["title"])}</h2><p class="lead">{proof["intro"]}</p><div class="cases">{cases}</div>'),
+ slide(f'<h2>Brands we have worked with</h2><div class="wall">{"".join(f"<img src=\"../assets/clients/{c}.png\" alt=\"\">" for c in WALL)}</div>'),
  slide(f'<h2>How we work</h2><p class="lead">Fully managed. You approve, we run everything else.</p><div class="steps">{steps}</div><div class="teamrow">{team}</div>'),
  f'''<section class="talk"><div class="in"><h2>Let's talk</h2>
   <div class="tk"><div><p class="big">{esc(spec["talk_text"])}</p><a class="btn" href="{spec["booking_url"]}" target="_blank">Book a call</a><p class="contact">{esc(spec["booking_url"].replace("https://",""))}<br>info@convertpolo.com · convertpolo.com</p><div class="pair">{lead_logo}<i></i><img src="../assets/logo.svg" alt="ConvertPolo"></div></div>
-  <div class="mosaic"><img src="../assets/cs/mobile_grid.png" alt=""><div class="logos"><div class="track">{logos}{logos}</div></div></div></div></div>{foot()}</section>''',
+  <div class="mosaic"><img src="../assets/cs/mobile_grid.png" alt=""></div></div></div>{foot()}</section>''',
 ]
 
 CSS = """
@@ -70,10 +72,11 @@ CSS = """
 .ct span{display:block;font-weight:700;font-size:16px;margin-top:4px}.ct p{font-size:14px;color:#444;margin-top:4px}
 .steps{display:grid;grid-template-columns:repeat(6,1fr);gap:22px}.step span{display:block;font-family:"Bricolage Grotesque",sans-serif;color:var(--o);font-weight:700;font-size:14px;border-top:2px solid var(--o);padding-top:10px}.step b{display:block;font-size:16px;margin:6px 0 4px}.step p{font-size:13.5px;color:#555}
 .teamrow{display:flex;gap:34px;margin-top:44px;padding-top:28px;border-top:1px solid var(--hair)}.m{display:flex;align-items:center;gap:12px}.m img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:top;filter:grayscale(1)}.m b{display:block;font-size:14px}.m span{font-size:12px;color:var(--soft)}
-.talk .tk{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}.big{font-size:21px;max-width:440px;margin-bottom:18px}
+.talk .tk{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start;margin-top:10px}.big{font-size:21px;max-width:440px;margin-bottom:18px}
 .btn{display:inline-block;background:var(--o);color:#fff;text-decoration:none;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:18px;padding:15px 32px;border-radius:40px}
 .contact{font-size:14px;color:var(--soft);margin-top:18px;line-height:1.6}.pair{display:flex;align-items:center;gap:22px;margin-top:30px}.pair img{height:28px}.pair i{width:1px;height:32px;background:var(--hair)}
-.mosaic img:first-child{width:100%;border-radius:10px;border:1px solid var(--hair);display:block}
+.mosaic img{width:100%;height:300px;object-fit:cover;border-radius:10px;border:1px solid var(--hair);display:block}
+.wall{display:grid;grid-template-columns:repeat(6,1fr);gap:18px 30px;align-items:center;margin-top:10px}.wall img{width:100%;height:70px;object-fit:contain;filter:grayscale(1);opacity:.8}
 .logos{margin-top:28px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .logos .track{display:flex;gap:50px;width:max-content;animation:cl 45s linear infinite;align-items:center}.logos img{height:26px;width:auto;filter:grayscale(1);opacity:.65}
 @keyframes cl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
