@@ -1,0 +1,33 @@
+{
+  "slug": "sheko",
+  "full_name": "Dustin Fleck",
+  "role": "Co-Founder",
+  "company": "SHEKO",
+  "domain": "sheko.com",
+  "logo": "sheko/logo.png",
+  "shot": "sheko/home.jpg",
+  "shot_pdp": "sheko/pdp.jpg",
+  "shot_mobile": "sheko/m_pdp.jpg",
+  "saw": [
+    "Nobody buys a shake plan for the shake. They buy the four weeks they hope it gets them through.",
+    "So the first screen has one job: show that it works for people like them, before they have to decide anything.",
+    "Your strongest answer, 11,000,000 meals sold and more than 10,000 Starter-Sets bought in two months, only shows up on the product page. The homepage opens with a question and two equal buttons."
+  ],
+  "points": [
+    {"head": "Proof sits one click deep", "text": "The homepage opens on a question, \"Balance gewinnen oder Gewicht verlieren?\", with two buttons of equal weight. The 11,000,000 meals sold and the 10,000 Starter-Sets in two months only appear after a click. We would test leading with them."},
+    {"head": "Three choices before the cart", "text": "The Starter-Set asks for three separate flavour picks before it can go in the cart, and on a phone the first screen shows no price and no button. A preselected best seller mix with a simple change option is a fast test."},
+    {"head": "Week four has no next step", "text": "The Starter-Set is a four week program, yet its page shows no subscribe or reorder option, although SHEKO runs subscriptions (Abo verwalten in the footer). Week four is when the customer decides, so the next step belongs on the page."},
+    {"head": "The discount waits at the bottom", "text": "The secret discount and the 60 page metabolism guide are offered in a block at the very end of the homepage, after the reviews. Testing the same offer higher up and on product pages could turn more of your visitors into a list."}
+  ],
+  "stats": [["386K", "monthly visits", "Similarweb"], ["4.8", "rating from 29,339 reviews", "sheko.com header"], ["11M", "meals sold", "Starter-Set page"], ["3", "flavour picks before the cart", "Starter-Set page"]],
+  "math": "At 386,000 visits a month, every 0.1 point of conversion rate is about 386 more orders a month, from traffic you already have.",
+  "tests": [
+    {"head": "Proof first homepage", "text": "Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.", "metric": "Clicks to product pages, revenue per visitor"},
+    {"head": "One tap Starter-Set", "text": "Preselect the three most popular flavours, put price and button in the first mobile screen.", "metric": "Mobile add to cart rate"},
+    {"head": "The week four bridge", "text": "A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.", "metric": "Repeat orders"}
+  ],
+  "tests_note": "Every idea runs as an A/B test first. Only the winners ship.",
+  "talk_text": "Thirty minutes on sheko.com. We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.",
+  "sender": {"name": "Ansuya Poudel", "role": "Brand & Growth, ConvertPolo", "photo": "team/ansuya.png"},
+  "booking_url": "https://calendly.com/ansuya-convertpolo/30min"
+}
