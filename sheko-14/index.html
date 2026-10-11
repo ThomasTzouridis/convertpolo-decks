@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>ConvertPolo for SHEKO</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Share+Tech+Mono&family=Architects+Daughter&display=swap">
+<link rel="stylesheet" href="../vendor/reset.css"><link rel="stylesheet" href="../vendor/reveal.css"><style>
+:root{--bg:#0D3B73;--ln:#fff;--dim:rgba(255,255,255,.78);--faint:rgba(255,255,255,.3);--hi:#FFE14D}
+.reveal{font-family:'Share Tech Mono',monospace;color:#fff}
+.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;background-color:var(--bg);
+background-image:linear-gradient(rgba(255,255,255,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+background-size:80px 80px,80px 80px,16px 16px,16px 16px}
+.sheet{position:absolute;left:28px;right:28px;top:28px;bottom:28px;border:2px solid #fff}
+.sheet:before{content:"";position:absolute;inset:6px;border:1px solid var(--faint);pointer-events:none}
+.in{position:absolute;left:64px;right:64px;top:54px;bottom:96px}
+.reveal h1,.reveal h2,.reveal h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;margin:0;font-weight:600;color:#fff;letter-spacing:.01em}
+.reveal h2{font-size:52px;line-height:1}.reveal h2 em{font-style:normal;color:var(--hi)}
+.reveal p{margin:0 0 12px;line-height:1.5}
+.kick{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:8px!important}
+.tb{position:absolute;left:28px;right:28px;bottom:28px;height:56px;border-top:2px solid #fff;display:grid;grid-template-columns:1fr 1.3fr 150px 110px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:var(--bg)}
+.tb>div{display:flex;flex-direction:column;justify-content:center;padding:0 18px;border-right:1px solid #fff}.tb>div:last-child{border:0}
+.tb small{font-size:9.5px;color:var(--dim)}.tb img{height:18px;width:auto;align-self:flex-start}.tb b{font-family:'Barlow Condensed';font-size:26px;font-weight:600}
+.cov-t{position:absolute;left:0;top:110px;width:560px}.cov-t h1{font-size:96px;line-height:.92;margin:6px 0 22px}.cov-t h1 em{font-style:normal;color:var(--hi)}
+.cov-t p{font-size:18px;color:var(--dim)}
+.brand{display:flex;gap:20px;align-items:center;margin-bottom:46px}.brand i{width:1px;height:30px;background:#fff}.brand .cp{height:28px}.brand .sh{height:30px;filter:brightness(0) invert(1)}
+.cov-s{position:absolute;right:0;top:120px;width:540px}
+.fr{position:relative;border:2px solid #fff;padding:8px;background:rgba(255,255,255,.06)}.fr img{width:100%;display:block;border:1px solid #fff}
+.dim{position:absolute;font-size:11px;color:var(--dim);letter-spacing:.1em}
+.pin{position:absolute;width:26px;height:26px;border:2px solid var(--hi);border-radius:50%;background:var(--bg);color:var(--hi);font-size:13px;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);z-index:3}
+.ring{position:absolute;border:2px dashed var(--hi);border-radius:6px;z-index:2}
+.note{font-family:'Architects Daughter',cursive;color:var(--hi);font-size:17px;line-height:1.2;position:absolute;z-index:3;white-space:nowrap}
+svg.ov{position:absolute;inset:0;width:100%;height:100%;z-index:2;overflow:visible}
+svg.ov *{stroke:var(--hi);stroke-width:2;fill:none}
+.saw{display:grid;grid-template-columns:400px 1fr;gap:60px;margin-top:26px}
+.saw .l{border-left:2px solid var(--faint);padding-left:18px;font-size:16.5px;color:var(--dim);margin-bottom:18px!important}
+.saw .l b{font-family:'Barlow Condensed';font-size:14px;color:#fff;display:block;letter-spacing:.2em;font-weight:500}
+.saw .l.k{border-left:4px solid var(--hi);color:#fff;background:rgba(255,225,77,.08);padding:12px 14px 12px 18px;font-size:17px}.saw .l.k b{color:var(--hi)}
+.sp{position:relative;margin-top:6px}
+.find{display:grid;grid-template-columns:1fr 330px;gap:36px;margin-top:18px}.pts{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px}
+.pt{border:1px solid var(--ln);padding:14px 16px;position:relative;background:rgba(13,59,115,.85)}.pt h3{font-size:22px;margin:0 0 6px 34px;line-height:1.1;padding-top:2px}.pt p{font-size:14.5px;line-height:1.45;color:var(--dim);margin:0}
+.pt .pin{left:26px;top:25px;width:24px;height:24px}
+.side{display:grid;grid-template-columns:140px 1fr;gap:18px}.ph{position:relative;margin-top:6px}.ph img{width:140px;height:290px;object-fit:cover;object-position:top;display:block;border:2px solid #fff;border-radius:16px}
+.stats{display:grid;gap:10px;align-content:start}.st{border-top:1px solid #fff;padding-top:5px}.st b{font-family:'Barlow Condensed';font-size:38px;line-height:1;font-weight:600;color:var(--hi);display:block}.st span{font-size:12px;display:block;line-height:1.25}.st small{font-size:10px;color:var(--dim)}
+.tests{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px}
+.tt{border:2px solid #fff;padding:30px 24px 24px;position:relative;background:rgba(13,59,115,.85)}.tt:before{content:attr(data-n);position:absolute;top:-16px;left:18px;background:var(--bg);padding:0 10px;color:var(--hi);font-size:14px;letter-spacing:.15em}
+.tt h3{font-size:32px;margin-bottom:10px;line-height:1}.tt p{font-size:17px;color:var(--dim)}.tt .m{border-top:1px dashed var(--faint);padding-top:10px;margin-top:14px;font-size:13px;color:#fff}.tt .m span{display:block;color:var(--hi);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
+.math{margin-top:56px;display:flex;gap:26px;align-items:flex-start}.math .eq{font-family:"Barlow Condensed";font-size:76px;line-height:.9;color:var(--hi);border:2px solid var(--hi);padding:10px 16px;white-space:nowrap;background:rgba(13,59,115,.85)}
+.math p{font-size:24px;line-height:1.4;max-width:780px;margin:0}.math .n{font-family:'Architects Daughter';color:var(--hi);font-size:18px;margin-top:10px}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:24px}.lead{font-size:21px;line-height:1.5;color:var(--dim)}
+.wfs{display:grid;grid-template-columns:repeat(3,1fr);margin-top:60px;border:1px solid #fff;background:rgba(13,59,115,.85)}.wf{padding:20px 14px;border-right:1px solid #fff}.wf:last-child{border:0}.wf b{font-family:"Barlow Condensed";font-size:48px;line-height:1;color:var(--hi);display:block;font-weight:600;white-space:nowrap}.wf span{font-size:12.5px;line-height:1.3;display:block;margin-top:6px}
+.team{display:grid;grid-template-columns:150px 150px;gap:10px 40px;justify-content:end}.mem img{width:150px;height:150px;object-fit:cover;object-position:top;filter:grayscale(1);display:block;border:2px solid #fff;background:#0a2f5c}
+.mem b{display:block;font-family:'Barlow Condensed';font-size:22px;text-transform:uppercase;margin-top:6px;font-weight:600;line-height:1}.mem span{font-size:12px;color:var(--hi)}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);margin-top:110px;position:relative}.steps:before{content:"";position:absolute;left:0;right:0;top:28px;border-top:2px dashed var(--faint)}
+.step{position:relative;padding-right:16px}.step .c{width:56px;height:56px;border:2px solid #fff;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;position:relative;color:var(--hi)}
+.step b{display:block;font-family:"Barlow Condensed";font-size:30px;text-transform:uppercase;margin:16px 0 8px;font-weight:600;line-height:1}.step p{font-size:15.5px;line-height:1.45;color:var(--dim)}
+.lead2{font-size:24px;margin-top:26px;color:var(--dim);max-width:760px}
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:18px}.case{color:#fff;text-decoration:none;display:block}.ci{border:2px solid #fff;padding:5px;height:230px;box-sizing:border-box;background:var(--bg)}.ci img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.ct{padding-top:8px}.ct b{font-family:'Barlow Condensed';font-size:46px;line-height:1;color:var(--hi);font-weight:600}.ct em{font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-left:6px}.ct span{display:block;font-family:'Barlow Condensed';text-transform:uppercase;font-size:22px;margin-top:2px}.ct p{font-size:12.5px;line-height:1.4;color:var(--dim);margin:3px 0 0}
+.logos{margin-top:26px;border-top:1px solid #fff;border-bottom:1px solid #fff;padding:12px 0;overflow:hidden}.logos .track{display:flex;gap:50px;width:max-content;align-items:center;animation:cl 50s linear infinite}.logos img{height:40px;width:auto;max-width:140px;object-fit:contain;background:#fff;padding:6px 10px;border-radius:2px}
+@keyframes cl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.talk{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;margin-top:70px}.big{font-size:28px!important;line-height:1.45;max-width:640px;margin-bottom:30px!important}
+.btn{display:inline-block;border:2px solid var(--hi);color:var(--hi);text-decoration:none;font-family:'Barlow Condensed';text-transform:uppercase;font-size:34px;padding:12px 40px;letter-spacing:.06em;background:rgba(255,225,77,.1)}
+.contact{font-size:14px;color:var(--dim);margin-top:20px!important}
+.card{display:grid;justify-items:start;gap:4px}.card img.ph2{width:240px;height:240px;object-fit:cover;object-position:top;filter:grayscale(1);display:block;border:2px solid #fff;background:#0a2f5c;margin-bottom:10px}.card b{font-family:'Barlow Condensed';font-size:30px;text-transform:uppercase;font-weight:600}.card span{font-size:14px;color:var(--dim)}
+.reveal .controls{color:var(--hi)}.reveal .progress{color:var(--hi)}
+</style></head><body><div class="reveal"><div class="slides"><section>
+
+<section><div class="sheet"></div><div class="in">
+<div class="cov-t"><div class="brand"><img class="cp" src="../assets/logo_white.svg" alt="ConvertPolo"><i></i><img class="sh" src="../assets/sheko/logo.png" alt="SHEKO"></div>
+<p class="kick">A conversion read, October 2026</p><h1>Prepared for <em>Dustin Fleck</em></h1><p>Co-Founder, SHEKO</p></div>
+<div class="cov-s"><div class="fr"><img src="../assets/sheko/home.jpg" alt=""><div class="pin" style="left:-2px;top:-2px">A</div></div><div class="dim" style="left:0;bottom:-24px">FIG. A, sheko.com homepage, not to scale</div></div>
+</div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>01/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 02 / Survey</p><h2>What we saw at <em>SHEKO</em></h2>
+<div class="saw"><div>
+<p class="l"><b>OBSERVATION 1</b>Nobody buys a shake plan for the shake. They buy the four weeks they hope it gets them through.</p>
+<p class="l"><b>OBSERVATION 2</b>So the first screen has one job: show that it works for people like them, before they have to decide anything.</p>
+<p class="l k"><b>OBSERVATION 3</b>Your strongest answer, 11,000,000 meals sold and more than 10,000 Starter-Sets bought in two months, only shows up on the product page. The homepage opens with a question and two equal buttons.</p></div>
+<div class="sp"><div class="fr"><img src="../assets/sheko/home.jpg" alt=""></div>
+<div class="ring" style="left:6%;top:30%;width:60%;height:38%"></div>
+<div class="pin" style="left:6%;top:30%">1</div>
+<div class="note" style="right:-6px;top:-30px">hero: a question, two equal buttons</div>
+<div class="note" style="left:0;top:-30px">11M meals and 10,000 sets: not here</div></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>02/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 03 / Findings</p><h2>Where sheko.com could convert harder</h2>
+<div class="find"><div class="pts">
+<div class="pt"><div class="pin">1</div><h3>Proof sits one click deep</h3><p>The homepage opens on a question, "Balance gewinnen oder Gewicht verlieren?", with two buttons of equal weight. The 11,000,000 meals sold and the 10,000 Starter-Sets in two months only appear after a click. We would test leading with them.</p></div>
+<div class="pt"><div class="pin">2</div><h3>Three choices before the cart</h3><p>The Starter-Set asks for three separate flavour picks before it can go in the cart, and on a phone the first screen shows no price and no button. A preselected best seller mix with a simple change option is a fast test.</p></div>
+<div class="pt"><div class="pin">3</div><h3>Week four has no next step</h3><p>The Starter-Set is a four week program, yet its page shows no subscribe or reorder option, although SHEKO runs subscriptions (Abo verwalten in the footer). Week four is when the customer decides, so the next step belongs on the page.</p></div>
+<div class="pt"><div class="pin">4</div><h3>The discount waits at the bottom</h3><p>The secret discount and the 60 page metabolism guide are offered in a block at the very end of the homepage, after the reviews. Testing the same offer higher up and on product pages could turn more of your visitors into a list.</p></div>
+</div>
+<div class="side"><div class="ph"><img src="../assets/sheko/m_pdp.jpg" alt=""><div class="pin" style="left:50%;top:60%">2</div></div>
+<div class="stats"><div class="st"><b>386K</b><span>monthly visits</span><small>Similarweb</small></div><div class="st"><b>4.8</b><span>rating from 29,339 reviews</span><small>sheko.com header</small></div><div class="st"><b>11M</b><span>meals sold</span><small>Starter-Set page</small></div><div class="st"><b>3</b><span>flavour picks before the cart</span><small>Starter-Set page</small></div></div></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>03/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 04 / Proposal</p><h2>How we could help <em>SHEKO</em></h2>
+<div class="tests">
+<div class="tt" data-n="TEST 01"><h3>Proof first homepage</h3><p>Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.</p><div class="m"><span>Measured by</span>Clicks to product pages, revenue per visitor</div></div>
+<div class="tt" data-n="TEST 02"><h3>One tap Starter-Set</h3><p>Preselect the three most popular flavours, put price and button in the first mobile screen.</p><div class="m"><span>Measured by</span>Mobile add to cart rate</div></div>
+<div class="tt" data-n="TEST 03"><h3>The week four bridge</h3><p>A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.</p><div class="m"><span>Measured by</span>Repeat orders</div></div></div>
+<div class="math"><div class="eq">0.1 pt = 386</div><div><p>At 386,000 visits a month, every 0.1 point of conversion rate is about 386 more orders a month, from traffic you already have.</p><p class="n">Every idea runs as an A/B test first. Only the winners ship.</p></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>04/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 05 / Team</p><h2>Who we are</h2>
+<div class="who"><div><p class="lead">ConvertPolo only does conversion. We run the whole experimentation program for e-commerce and D2C brands, from research and hypotheses to design, development, QA and analysis, as an extension of your team.</p>
+<div class="wfs"><div class="wf"><b>120+</b><span>online shops under CRO management</span></div><div class="wf"><b>VWO</b><span>official agency partner</span></div><div class="wf"><b>Month 3</b><span>when results typically show</span></div></div></div>
+<div class="team"><div class="mem"><img src="../assets/team/anirban.png" alt=""><b>Anirban Chakraborty</b><span>Founder & CEO</span></div><div class="mem"><img src="../assets/team/saurabh.png" alt=""><b>Saurabh Patwa</b><span>Co-Founder</span></div><div class="mem"><img src="../assets/team/ansuya.png" alt=""><b>Ansuya Poudel</b><span>Brand & Growth</span></div><div class="mem"><img src="../assets/team/ankita.png" alt=""><b>Ankita Daga</b><span>UX UI Design Lead</span></div></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>05/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 06 / Process</p><h2>How we work together</h2>
+<p class="lead2">Fully managed. You approve, we run everything else, one test after the next.</p>
+<div class="steps">
+<div class="step"><div class="c">01</div><b>Research</b><p>Analytics, session recordings, voice of customer</p></div>
+<div class="step"><div class="c">02</div><b>Hypotheses</b><p>Ranked by expected impact and speed</p></div>
+<div class="step"><div class="c">03</div><b>Design and build</b><p>Our designers and developers, not your roadmap</p></div>
+<div class="step"><div class="c">04</div><b>QA and launch</b><p>Every test verified before a visitor sees it</p></div>
+<div class="step"><div class="c">05</div><b>Analyze</b><p>Statistical significance, not gut feeling</p></div>
+<div class="step"><div class="c">06</div><b>Iterate</b><p>Winners roll out, learnings feed the next test</p></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>06/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 07 / References</p><h2>Some of our work</h2>
+<div class="cases">
+<a class="case" href="https://convertpolo.com/casestudies/anothersole-product-discovery-improvement/" target="_blank"><div class="ci"><img src="../assets/cs/anothersole_big.jpg" alt=""></div><div class="ct"><b>+185%</b><em>Revenue</em><span>Anothersole</span><p>Footwear D2C. Rebuilt product discovery and the shopping journey.</p></div></a>
+<a class="case" href="https://convertpolo.com/casestudies/how-roshambo-boosted-revenue-per-visitor-by-36-13-with-targeted-ux-experiments/" target="_blank"><div class="ci"><img src="../assets/cs/roshambo_big.jpg" alt=""></div><div class="ct"><b>+36.13%</b><em>Rev. per visitor</em><span>Roshambo</span><p>Eyewear. Targeted UX experiments across the store.</p></div></a>
+<a class="case" href="https://convertpolo.com/casestudies/theater-mobile-experience-redesign/" target="_blank"><div class="ci"><img src="../assets/cs/theater_big.jpg" alt=""></div><div class="ct"><b>+38%</b><em>Rev. per visitor</em><span>Theater</span><p>Fashion. Mobile experience redesign.</p></div></a>
+<a class="case" href="https://convertpolo.com/casestudies/beyond-by-vera/" target="_blank"><div class="ci"><img src="../assets/cs/beyondbyvera_big.png" alt=""></div><div class="ct"><b>+53%</b><em>Conversion</em><span>Beyond by Vera</span><p>Premium fashion. Slide-out cart and a timed recovery popup.</p></div></a></div>
+<div class="logos"><div class="track"><img src="../assets/clients/l1.png" alt=""><img src="../assets/clients/l2.png" alt=""><img src="../assets/clients/l3.png" alt=""><img src="../assets/clients/l4.png" alt=""><img src="../assets/clients/l5.png" alt=""><img src="../assets/clients/l6.png" alt=""><img src="../assets/clients/l7.png" alt=""><img src="../assets/clients/l8.png" alt=""><img src="../assets/clients/l9.png" alt=""><img src="../assets/clients/l11.png" alt=""><img src="../assets/clients/l12.png" alt=""><img src="../assets/clients/l14.png" alt=""><img src="../assets/clients/l15.png" alt=""><img src="../assets/clients/l16.png" alt=""><img src="../assets/clients/l17.png" alt=""><img src="../assets/clients/l18.png" alt=""><img src="../assets/clients/l19.png" alt=""><img src="../assets/clients/l1.png" alt=""><img src="../assets/clients/l2.png" alt=""><img src="../assets/clients/l3.png" alt=""><img src="../assets/clients/l4.png" alt=""><img src="../assets/clients/l5.png" alt=""><img src="../assets/clients/l6.png" alt=""><img src="../assets/clients/l7.png" alt=""><img src="../assets/clients/l8.png" alt=""><img src="../assets/clients/l9.png" alt=""><img src="../assets/clients/l11.png" alt=""><img src="../assets/clients/l12.png" alt=""><img src="../assets/clients/l14.png" alt=""><img src="../assets/clients/l15.png" alt=""><img src="../assets/clients/l16.png" alt=""><img src="../assets/clients/l17.png" alt=""><img src="../assets/clients/l18.png" alt=""><img src="../assets/clients/l19.png" alt=""></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>07/08</b></div></div></section>
+
+<section><div class="sheet"></div><div class="in"><p class="kick">Sheet 08 / Next step</p><h2>Let's talk about <em>SHEKO</em> x ConvertPolo</h2>
+<div class="talk"><div><p class="big">Thirty minutes on sheko.com. We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.</p>
+<a class="btn" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call</a><p class="contact">calendly.com/ansuya-convertpolo/30min<br>convertpolo.com</p></div>
+<div class="card"><img class="ph2" src="../assets/team/ansuya.png" alt=""><b>Ansuya Poudel</b><span>Brand &amp; Growth, ConvertPolo</span></div></div></div>
+<div class="tb"><div><small>Project</small>Conversion read</div><div><small>Client</small>SHEKO, Dustin Fleck</div><div><small>By</small><img src="../assets/logo_white.svg" alt=""></div><div><small>Sheet</small><b>08/08</b></div></div></section>
+
+</section></div></div>
+<script src="../vendor/reveal.js"></script><script>Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false});</script></body></html>

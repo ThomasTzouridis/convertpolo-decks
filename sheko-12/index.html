@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>ConvertPolo for SHEKO</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../vendor/reset.css"><link rel="stylesheet" href="../vendor/reveal.css"><style>
+:root{--ink:#fff;--mut:rgba(255,255,255,.72);--glass:rgba(255,255,255,.12);--edge:rgba(255,255,255,.28)}
+.reveal{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink)}
+.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;overflow:hidden;
+background:
+radial-gradient(520px 420px at 8% 12%,#ff5fa2 0,transparent 70%),
+radial-gradient(620px 480px at 92% 8%,#7c5cff 0,transparent 70%),
+radial-gradient(600px 500px at 78% 100%,#19c5d6 0,transparent 70%),
+radial-gradient(520px 420px at 0% 100%,#ff9a4d 0,transparent 70%),#1b1146}
+.reveal .slides section.alt{background:
+radial-gradient(560px 440px at 95% 90%,#ff5fa2 0,transparent 70%),
+radial-gradient(620px 480px at 5% 5%,#19c5d6 0,transparent 70%),
+radial-gradient(600px 460px at 60% 0%,#7c5cff 0,transparent 70%),
+radial-gradient(500px 400px at 0% 100%,#5b4bff 0,transparent 70%),#160f3d}
+.in{position:absolute;left:70px;right:70px;top:52px;bottom:64px}
+.reveal h1,.reveal h2,.reveal h3{font-family:'Plus Jakarta Sans',sans-serif;text-transform:none;margin:0;color:#fff;letter-spacing:-.02em}
+.reveal h2{font-size:44px;line-height:1.08;font-weight:800}
+.reveal p{margin:0;color:var(--mut)}
+.glass{background:var(--glass);border:1px solid var(--edge);border-radius:22px;backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);box-shadow:0 10px 40px rgba(10,5,50,.25),inset 0 1px 0 rgba(255,255,255,.3)}
+.chip{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:99px;margin-bottom:14px;background:var(--glass);border:1px solid var(--edge);color:#fff}
+.foot{position:absolute;left:70px;right:70px;bottom:22px;display:flex;align-items:center;gap:16px;font-size:12px;color:var(--mut)}
+.foot img{height:16px}.foot .pg{margin-left:auto;margin-right:56px;font-weight:700;color:#fff}
+.wl{background:rgba(255,255,255,.92);border-radius:14px;padding:10px 18px;display:inline-flex;align-items:center}.wl img{height:26px;display:block}
+.cover .brand{display:flex;align-items:center;gap:16px}.cover .brand .cp{height:30px}.cover .brand i{width:1px;height:30px;background:var(--edge)}
+.cover h1{font-size:76px;line-height:1;font-weight:800;margin-top:6px}
+.cover h1 span{background:linear-gradient(90deg,#ffd3a1,#ff8fc1 50%,#a99bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .cv{position:absolute;left:0;top:150px;width:560px}.cover .cv p{font-size:20px;margin-top:20px}
+.cover .hero{position:absolute;right:0;top:40px;width:540px;padding:12px;transform:rotate(2deg);margin:0}.cover .hero img{width:100%;border-radius:14px;display:block}
+.saw{display:grid;grid-template-columns:1fr 1.1fr;gap:44px;margin-top:30px;align-items:start}
+.saw .txt{display:grid;gap:16px}.saw .txt p{font-size:19px;line-height:1.5;padding:20px 24px}
+.saw .txt p.key{color:#fff;font-weight:600;background:linear-gradient(135deg,rgba(255,95,162,.4),rgba(124,92,255,.35))}
+.saw .pic{padding:10px}.saw .pic img{width:100%;border-radius:14px;display:block}
+.find{display:grid;grid-template-columns:1fr 300px;gap:24px;margin-top:22px}
+.pts{display:grid;grid-template-columns:1fr 1fr;gap:16px}.pt{padding:26px 24px}.pt .no{font-size:12px;font-weight:700;color:#ffd3a1}
+.pt h3{font-size:20px;margin:6px 0 8px;font-weight:700}.pt p{font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.82)}
+.side{display:grid;gap:12px;grid-template-columns:104px 1fr}
+.phone{padding:6px;height:fit-content}.phone img{width:92px;height:240px;object-fit:cover;object-position:top;border-radius:14px;display:block}
+.stats{display:grid;gap:10px}.st{padding:11px 14px}.st b{display:block;font-size:28px;font-weight:800;line-height:1;background:linear-gradient(90deg,#ffd3a1,#ff8fc1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.st span{display:block;font-size:12px;margin-top:3px;color:#fff;line-height:1.25}.st small{font-size:10px;color:var(--mut)}
+.tests{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:34px}.tt{padding:34px 30px}.tt .no{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ffd3a1}
+.tt h3{font-size:25px;margin:10px 0 12px;font-weight:700}.tt p{font-size:16.5px;line-height:1.5;color:rgba(255,255,255,.85)}
+.tt .metric{margin-top:16px;padding-top:14px;border-top:1px solid var(--edge);font-size:14.5px;color:#fff}.metric span{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9ff0f7;margin-bottom:3px}
+.math{margin-top:30px;padding:34px 36px;background:linear-gradient(135deg,rgba(25,197,214,.35),rgba(124,92,255,.35))}.math p.m1{font-size:24px;line-height:1.35;color:#fff;font-weight:600}.math p.n{font-size:15px;margin-top:8px}
+.who2{display:grid;grid-template-columns:1fr 1.05fr;gap:36px;margin-top:30px}.lead{font-size:20px;line-height:1.5;color:rgba(255,255,255,.88)}
+.wfs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}.wf{padding:16px}.wf b{display:block;font-size:30px;font-weight:800;white-space:nowrap}.wf span{font-size:13px;line-height:1.35;display:block;margin-top:4px;color:#fff}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:16px}.m{padding:18px;display:grid;justify-items:start;gap:3px}.m img{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--edge);margin-bottom:8px}.m b{font-size:17px;font-weight:700}.m span{font-size:13.5px;color:var(--mut)}
+.lead2{font-size:22px;margin-top:20px;color:rgba(255,255,255,.88)!important}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.step{padding:24px 26px}.step .no{font-size:34px;font-weight:800;background:linear-gradient(90deg,#ffd3a1,#ff8fc1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step b{display:block;font-size:22px;margin:6px 0 8px;font-weight:700}.step p{font-size:15.5px;line-height:1.45;color:rgba(255,255,255,.82)}
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}.case{display:block;text-decoration:none;color:#fff;padding:10px;overflow:hidden}.ci{height:210px;overflow:hidden;border-radius:14px}.ci img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.ct{padding:12px 6px 4px}.ct b{font-size:34px;font-weight:800;margin-right:6px;background:linear-gradient(90deg,#ffd3a1,#ff8fc1);-webkit-background-clip:text;background-clip:text;color:transparent}.ct em{display:block;margin-top:2px;font-style:normal;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.ct span{display:block;font-weight:700;font-size:16px;margin-top:4px}.ct p{font-size:12.5px;line-height:1.4;margin-top:3px}
+.logos{margin-top:30px;padding:20px 0;overflow:hidden;background:rgba(255,255,255,.9);border-radius:18px}
+.logos .track{display:flex;gap:50px;width:max-content;animation:cl 50s linear infinite;align-items:center}.logos img{height:34px;width:auto}
+@keyframes cl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.talk{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;margin-top:34px;align-items:center}
+.big{font-size:28px!important;line-height:1.4;color:#fff!important;font-weight:600;margin-bottom:32px!important}
+.btn{display:inline-block;text-decoration:none;font-size:20px;font-weight:700;padding:18px 40px;border-radius:99px;color:#24135e;background:linear-gradient(90deg,#ffd3a1,#ff9fc8);box-shadow:0 10px 30px rgba(255,120,180,.4)}
+.contact{font-size:14px;margin-top:20px!important;line-height:1.6}
+.card{padding:30px;display:grid;justify-items:center;text-align:center;gap:4px}.card>img{width:190px;height:190px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid var(--edge);margin-bottom:12px}.card b{font-size:22px}.card span{font-size:15px;color:var(--mut)}
+.pair{display:flex;align-items:center;gap:16px;margin-top:16px}.pair .cp{height:22px}.pair .wl{padding:7px 12px}.pair .wl img{height:20px}
+.reveal .controls,.reveal .progress{color:#ffd3a1}
+</style></head>
+<body><div class="reveal"><div class="slides"><section>
+<section class="cover"><div class="in"><div class="brand"><img class="cp" src="../assets/logo_white.svg" alt="ConvertPolo"><i></i><span class="wl"><img src="../assets/sheko/logo.png" alt="SHEKO"></span></div>
+<div class="cv"><span class="chip">A conversion read, October 2026</span><h1>Prepared for<br><span>Dustin Fleck</span></h1><p>Co-Founder, SHEKO</p></div>
+<figure class="hero glass"><img src="../assets/sheko/home.jpg" alt=""></figure></div></section>
+
+<section class="alt"><div class="in"><span class="chip">01 First look</span><h2>What we saw at SHEKO</h2><div class="saw"><div class="txt"><p class="glass">Nobody buys a shake plan for the shake. They buy the four weeks they hope it gets them through.</p><p class="glass">So the first screen has one job: show that it works for people like them, before they have to decide anything.</p><p class="glass key">Your strongest answer, 11,000,000 meals sold and more than 10,000 Starter-Sets bought in two months, only shows up on the product page. The homepage opens with a question and two equal buttons.</p></div><div class="pic glass"><img src="../assets/sheko/home.jpg" alt=""></div></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">02</span></div></section>
+
+<section><div class="in"><span class="chip">02 Findings</span><h2>Where sheko.com could convert harder</h2><div class="find"><div class="pts">
+<div class="pt glass"><span class="no">01</span><h3>Proof sits one click deep</h3><p>The homepage opens on a question, "Balance gewinnen oder Gewicht verlieren?", with two buttons of equal weight. The 11,000,000 meals sold and the 10,000 Starter-Sets in two months only appear after a click. We would test leading with them.</p></div>
+<div class="pt glass"><span class="no">02</span><h3>Three choices before the cart</h3><p>The Starter-Set asks for three separate flavour picks before it can go in the cart, and on a phone the first screen shows no price and no button. A preselected best seller mix with a simple change option is a fast test.</p></div>
+<div class="pt glass"><span class="no">03</span><h3>Week four has no next step</h3><p>The Starter-Set is a four week program, yet its page shows no subscribe or reorder option, although SHEKO runs subscriptions (Abo verwalten in the footer). Week four is when the customer decides, so the next step belongs on the page.</p></div>
+<div class="pt glass"><span class="no">04</span><h3>The discount waits at the bottom</h3><p>The secret discount and the 60 page metabolism guide are offered in a block at the very end of the homepage, after the reviews. Testing the same offer higher up and on product pages could turn more of your visitors into a list.</p></div></div>
+<div class="side"><div class="phone glass"><img src="../assets/sheko/m_pdp.jpg" alt=""></div><div class="stats">
+<div class="st glass"><b>386K</b><span>monthly visits</span><small>Similarweb</small></div><div class="st glass"><b>4.8</b><span>rating from 29,339 reviews</span><small>sheko.com header</small></div><div class="st glass"><b>11M</b><span>meals sold</span><small>Starter-Set page</small></div><div class="st glass"><b>3</b><span>flavour picks before the cart</span><small>Starter-Set page</small></div></div></div></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">03</span></div></section>
+
+<section class="alt"><div class="in"><span class="chip">03 First tests</span><h2>How we could help SHEKO</h2><div class="tests">
+<div class="tt glass"><span class="no">Test 01</span><h3>Proof first homepage</h3><p>Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.</p><div class="metric"><span>Measured by</span>Clicks to product pages, revenue per visitor</div></div>
+<div class="tt glass"><span class="no">Test 02</span><h3>One tap Starter-Set</h3><p>Preselect the three most popular flavours, put price and button in the first mobile screen.</p><div class="metric"><span>Measured by</span>Mobile add to cart rate</div></div>
+<div class="tt glass"><span class="no">Test 03</span><h3>The week four bridge</h3><p>A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.</p><div class="metric"><span>Measured by</span>Repeat orders</div></div></div>
+<div class="math glass"><p class="m1">At 386,000 visits a month, every 0.1 point of conversion rate is about 386 more orders a month, from traffic you already have.</p><p class="n">Every idea runs as an A/B test first. Only the winners ship.</p></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">04</span></div></section>
+
+<section><div class="in"><span class="chip">04 ConvertPolo</span><h2>Who we are</h2><div class="who2"><div><p class="lead">ConvertPolo only does conversion. We run the whole experimentation program for e-commerce and D2C brands, from research and hypotheses to design, development, QA and analysis, as an extension of your team.</p><div class="wfs"><div class="wf glass"><b>120+</b><span>online shops under CRO management</span></div><div class="wf glass"><b>VWO</b><span>official agency partner</span></div><div class="wf glass"><b>Month 3</b><span>when results typically start to show</span></div></div></div>
+<div class="team"><div class="m glass"><img src="../assets/team/anirban.png" alt=""><b>Anirban Chakraborty</b><span>Founder &amp; CEO</span></div><div class="m glass"><img src="../assets/team/saurabh.png" alt=""><b>Saurabh Patwa</b><span>Co-Founder</span></div><div class="m glass"><img src="../assets/team/ansuya.png" alt=""><b>Ansuya Poudel</b><span>Brand &amp; Growth</span></div><div class="m glass"><img src="../assets/team/ankita.png" alt=""><b>Ankita Daga</b><span>UX UI Design Lead</span></div></div></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">05</span></div></section>
+
+<section class="alt"><div class="in"><span class="chip">05 The program</span><h2>How we work together</h2><p class="lead2">Fully managed. You approve, we run everything else, one test after the next.</p><div class="steps">
+<div class="step glass"><span class="no">01</span><b>Research</b><p>Analytics, session recordings, voice of customer</p></div><div class="step glass"><span class="no">02</span><b>Hypotheses</b><p>Ranked by expected impact and speed</p></div><div class="step glass"><span class="no">03</span><b>Design and build</b><p>Our designers and developers, not your roadmap</p></div>
+<div class="step glass"><span class="no">04</span><b>QA and launch</b><p>Every test verified before a visitor sees it</p></div><div class="step glass"><span class="no">05</span><b>Analyze</b><p>Statistical significance, not gut feeling</p></div><div class="step glass"><span class="no">06</span><b>Iterate</b><p>Winners roll out, learnings feed the next test</p></div></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">06</span></div></section>
+
+<section><div class="in"><span class="chip">06 Results</span><h2>Some of our work</h2><div class="cases">
+<a class="case glass" href="https://convertpolo.com/casestudies/anothersole-product-discovery-improvement/" target="_blank"><div class="ci"><img src="../assets/cs/anothersole_big.jpg" alt=""></div><div class="ct"><b>+185%</b><em>Revenue</em><span>Anothersole</span><p>Footwear D2C. Rebuilt product discovery and the shopping journey.</p></div></a>
+<a class="case glass" href="https://convertpolo.com/casestudies/how-roshambo-boosted-revenue-per-visitor-by-36-13-with-targeted-ux-experiments/" target="_blank"><div class="ci"><img src="../assets/cs/roshambo_big.jpg" alt=""></div><div class="ct"><b>+36.13%</b><em>Rev. per visitor</em><span>Roshambo</span><p>Eyewear. Targeted UX experiments across the store.</p></div></a>
+<a class="case glass" href="https://convertpolo.com/casestudies/theater-mobile-experience-redesign/" target="_blank"><div class="ci"><img src="../assets/cs/theater_big.jpg" alt=""></div><div class="ct"><b>+38%</b><em>Rev. per visitor</em><span>Theater</span><p>Fashion. Mobile experience redesign.</p></div></a>
+<a class="case glass" href="https://convertpolo.com/casestudies/beyond-by-vera/" target="_blank"><div class="ci"><img src="../assets/cs/beyondbyvera_big.png" alt=""></div><div class="ct"><b>+53%</b><em>Conversion</em><span>Beyond by Vera</span><p>Premium fashion. Slide-out cart and a timed recovery popup.</p></div></a></div>
+<div class="logos"><div class="track" id="tr"></div></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">07</span></div></section>
+
+<section class="alt"><div class="in"><span class="chip">07 Next step</span><h2>Let's talk about SHEKO × ConvertPolo</h2><div class="talk"><div><p class="big">Thirty minutes on sheko.com. We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.</p><a class="btn" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call</a><p class="contact">calendly.com/ansuya-convertpolo/30min<br>convertpolo.com</p></div>
+<div class="card glass"><img src="../assets/team/ansuya.png" alt=""><b>Ansuya Poudel</b><span>Brand &amp; Growth, ConvertPolo</span><div class="pair"><img class="cp" src="../assets/logo_white.svg" alt=""><span class="wl"><img src="../assets/sheko/logo.png" alt=""></span></div></div></div></div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">08</span></div></section>
+</section></div></div>
+<script src="../vendor/reveal.js"></script><script>
+var ids=[1,2,3,4,5,6,7,8,9,11,12,14,15,16,17,18,19],h='';for(var k=0;k<2;k++)ids.forEach(function(i){h+='<img src="../assets/clients/l'+i+'.png" alt="">'});document.getElementById('tr').innerHTML=h;
+Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false});</script></body></html>
