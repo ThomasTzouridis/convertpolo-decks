@@ -1,0 +1,269 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>ConvertPolo for SHEKO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../vendor/reset.css"><link rel="stylesheet" href="../vendor/reveal.css">
+<style>
+:root{--blk:#000;--ch:#222;--off:#F6F6F6;--gr:#E4E4E4;--lime:#D8E01E;--pur:#8A6E9A;--pink:#E9D5DF;--org:#E8641A;--ink:#111;--mut:#6b6b6b}
+html,body{background:#000}
+.reveal{font-family:Inter,Arial,sans-serif;color:var(--ink)}
+.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;overflow:hidden}
+.reveal .slides section.dk{background:var(--blk);color:#fff}
+.reveal .slides section.ch{background:var(--ch);color:#fff}
+.reveal .slides section.lt{background:var(--off);color:var(--ink)}
+.reveal .slides section.gr{background:var(--gr);color:var(--ink)}
+.in{position:absolute;left:72px;right:72px;top:60px;bottom:64px}
+.reveal h1,.reveal h2,.reveal h3{margin:0;text-transform:uppercase;font-family:Archivo,sans-serif;font-stretch:125%;font-weight:800;letter-spacing:-.01em;color:inherit}
+.reveal h2{font-size:52px;line-height:.98}
+.reveal h2 em,.reveal h1 em{display:block;font-style:italic;color:var(--lime)}
+.lt h2 em,.gr h2 em{color:#9aa000;-webkit-text-stroke:0}
+.reveal p{margin:0}
+.wide{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:800;text-transform:uppercase}
+.cap{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.lab{display:inline-block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:5px 9px;margin-bottom:16px}
+.lab.o{background:var(--org);color:#000}.lab.p{background:var(--pink);color:#000}.lab.v{background:var(--pur);color:#fff}.lab.l{background:var(--lime);color:#000}
+.btn{display:inline-block;font-family:Archivo,sans-serif;font-stretch:125%;font-weight:700;text-transform:uppercase;font-size:14px;letter-spacing:.06em;padding:12px 18px;text-decoration:none!important;line-height:1}
+.btn.lime{background:var(--lime);color:#000!important}
+.btn.out{border:1.5px solid currentColor;color:inherit!important;padding:10.5px 16.5px}
+.top{position:absolute;left:72px;right:72px;top:30px;display:flex;align-items:center;gap:20px;z-index:3}
+.top img{height:22px}.top .r{margin-left:auto;display:flex;gap:16px;align-items:center}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.foot img{height:15px}.foot .pg{margin-left:auto;margin-right:60px}
+.dk .foot,.ch .foot{color:#fff}
+/* badge */
+.badge{position:absolute;width:150px;height:150px}
+.badge svg{position:absolute;inset:0;animation:spin 22s linear infinite}
+.badge .c{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-family:Archivo,sans-serif;font-stretch:125%;font-weight:800;font-size:13px;line-height:1.1;text-transform:uppercase}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* stat bar */
+.sb{border-left:3px solid var(--lime);padding:2px 0 2px 16px}
+.sb b{display:block;font-family:Archivo,sans-serif;font-stretch:125%;font-weight:800;font-size:48px;line-height:1;color:var(--lime)}
+.sb span{display:block;font-size:14px;line-height:1.35;margin-top:8px}
+.sb small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-top:6px}
+.lt .sb b,.gr .sb b{color:#000}
+/* rows */
+.rows{border-top:1px solid rgba(0,0,0,.18)}
+.row{display:grid;border-bottom:1px solid rgba(0,0,0,.18);align-items:start}
+.dk .rows,.ch .rows,.dk .row,.ch .row{border-color:rgba(255,255,255,.2)}
+.arrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;white-space:nowrap;text-align:right;text-decoration:none!important;color:inherit!important}
+/* cover */
+.s-cover .hero{position:absolute;left:72px;bottom:170px;right:72px}
+.s-cover h1{font-size:96px;line-height:.94}
+.s-cover .sub{position:absolute;left:72px;right:72px;bottom:70px;display:flex;align-items:flex-end;gap:40px}
+.s-cover .sub p{font-size:17px;line-height:1.55;max-width:520px;color:#cfcfcf}
+.s-cover .sub .bt{margin-left:auto;display:flex;gap:12px}
+.s-cover .prep{position:absolute;left:72px;top:118px;display:flex;align-items:center;gap:18px}
+.s-cover .prep img{height:30px;filter:brightness(0) invert(1)}
+.s-cover .prep span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#bdbdbd}
+.s-cover .prep i{width:1px;height:28px;background:#555}
+</style></head><body>
+<div class="reveal"><div class="slides">
+
+<!-- 1 COVER -->
+<section class="dk s-cover">
+  <div class="top"><img src="../assets/logo_white.svg" alt="ConvertPolo"><div class="r"><span class="cap" style="color:#9a9a9a">CRO, proven by A/B tests</span><a class="btn lime" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call</a></div></div>
+  <div class="prep"><img src="../assets/sheko/logo.png" alt="SHEKO"><i></i><span>Prepared for Dustin Fleck, Co-Founder, SHEKO</span></div>
+  <div class="badge" style="right:96px;top:150px;color:#fff">
+    <svg viewBox="0 0 150 150"><defs><path id="cp" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs><circle cx="75" cy="75" r="73" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="3 4"/><text font-family="Inter" font-size="10.5" letter-spacing="1" fill="#fff"><textPath href="#cp" textLength="360" lengthAdjust="spacing">EVERY CHANGE A/B TESTED . ONLY WINNERS SHIP . </textPath></text></svg>
+    <div class="c" style="color:var(--lime)">No<br>guess<br>work</div>
+  </div>
+  <div class="hero"><h1>The anti guesswork<br>agency. <em style="display:inline">For SHEKO.</em></h1></div>
+  <div class="sub"><p>ConvertPolo does one thing: conversion. We read sheko.com like a buyer, wrote down where the money leaks and lined up the first three A/B tests. No opinions. Just tests.</p>
+    <div class="bt"><a class="btn out" href="#/4">Who we are</a><a class="btn lime" href="#/7">Cases</a></div></div>
+</section>
+
+<!-- 2 WHAT WE SAW -->
+<section class="lt">
+  <div class="in" style="display:grid;grid-template-columns:1fr 520px;gap:56px">
+    <div>
+      <span class="lab o">01 . What we saw</span>
+      <h2>We opened sheko.com.<em>And looked.</em></h2>
+      <div class="rows" style="margin-top:30px">
+        <div class="row" style="grid-template-columns:54px 1fr;padding:15px 0"><span class="wide" style="font-size:15px;color:var(--pur)">01</span><p style="font-size:16.5px;line-height:1.5">Nobody buys a shake plan for the shake. They buy the four weeks they hope it gets them through.</p></div>
+        <div class="row" style="grid-template-columns:54px 1fr;padding:15px 0"><span class="wide" style="font-size:15px;color:var(--pur)">02</span><p style="font-size:16.5px;line-height:1.5">So the first screen has one job: show that it works for people like them, before they have to decide anything.</p></div>
+        <div class="row" style="grid-template-columns:54px 1fr;padding:15px 0"><span class="wide" style="font-size:15px;color:var(--pur)">03</span><p style="font-size:16.5px;line-height:1.5">Your strongest answer, <b>11,000,000 meals sold</b> and <b>more than 10,000 Starter-Sets in two months</b>, only shows up on the product page. The homepage opens with a question and two equal buttons.</p></div>
+      </div>
+    </div>
+    <div style="position:relative;padding-top:6px">
+      <div style="background:#000;padding:10px 10px 0;border-radius:4px 4px 0 0"><div style="display:flex;gap:6px;padding:0 0 9px"><i style="width:9px;height:9px;border-radius:50%;background:#444"></i><i style="width:9px;height:9px;border-radius:50%;background:#444"></i><i style="width:9px;height:9px;border-radius:50%;background:#444"></i><span style="margin-left:12px;font-size:10px;color:#888;letter-spacing:.1em">SHEKO.COM</span></div>
+      <img src="../assets/sheko/home.jpg" alt="" style="width:100%;height:440px;object-fit:cover;object-position:top;display:block"></div>
+      <div style="position:absolute;left:-30px;bottom:30px;background:var(--lime);padding:14px 18px;max-width:300px"><div class="cap" style="font-weight:700;margin-bottom:4px">The question</div><div class="wide" style="font-size:14px;line-height:1.25">Balance gewinnen oder Gewicht verlieren?</div></div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">02</span></div>
+</section>
+
+<!-- 3 FINDINGS -->
+<section class="ch">
+  <div class="in">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><span class="lab p">02 . Findings</span><h2>Four leaks.<em>Zero guesses.</em></h2></div>
+      <p style="max-width:360px;font-size:15px;line-height:1.55;color:#bbb;text-align:right">Every point below comes from sheko.com itself. Not a template. Not a checklist. Your store.</p>
+    </div>
+    <div class="rows" style="margin-top:28px">
+      <div class="row" style="grid-template-columns:60px 330px 1fr;gap:20px;padding:19px 0"><span class="wide" style="color:var(--lime);font-size:15px">01</span><h3 style="font-size:19px;line-height:1.15">Proof sits one click deep</h3><p style="font-size:15.5px;line-height:1.55;color:#d4d4d4">The homepage opens on "Balance gewinnen oder Gewicht verlieren?" with two equal buttons. The 11,000,000 meals and the 10,000 Starter-Sets in two months only appear after a click. We would test leading with them.</p></div>
+      <div class="row" style="grid-template-columns:60px 330px 1fr;gap:20px;padding:19px 0"><span class="wide" style="color:var(--lime);font-size:15px">02</span><h3 style="font-size:19px;line-height:1.15">Three choices before the cart</h3><p style="font-size:15.5px;line-height:1.55;color:#d4d4d4">The Starter-Set asks for three separate flavour picks before the cart, and on a phone the first screen shows no price and no button. A preselected best seller mix with a simple change option is a fast test.</p></div>
+      <div class="row" style="grid-template-columns:60px 330px 1fr;gap:20px;padding:19px 0"><span class="wide" style="color:var(--lime);font-size:15px">03</span><h3 style="font-size:19px;line-height:1.15">Week four has no next step</h3><p style="font-size:15.5px;line-height:1.55;color:#d4d4d4">A four week program, yet the page shows no subscribe or reorder option, although SHEKO runs subscriptions (Abo verwalten in the footer). Week four is when the customer decides.</p></div>
+      <div class="row" style="grid-template-columns:60px 330px 1fr;gap:20px;padding:19px 0"><span class="wide" style="color:var(--lime);font-size:15px">04</span><h3 style="font-size:19px;line-height:1.15">The discount waits at the bottom</h3><p style="font-size:15.5px;line-height:1.55;color:#d4d4d4">The secret discount and the 60 page metabolism guide sit at the very end of the homepage, after the reviews. Testing the same offer higher up could turn more visitors into a list.</p></div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">03</span></div>
+</section>
+
+<!-- 4 NUMBERS -->
+<section class="dk">
+  <div class="in" style="display:grid;grid-template-columns:1fr 250px;gap:64px">
+    <div>
+      <span class="lab l">03 . The numbers</span>
+      <h2>The demand is there.<em>Magic.</em></h2>
+      <p style="font-size:17px;line-height:1.55;color:#bdbdbd;max-width:620px;margin-top:22px">SHEKO does not have a traffic problem. It has visitors who already came, already trust the brand and still have to work to buy. That is the cheapest growth there is.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:34px 40px;margin-top:38px">
+        <div class="sb"><b>386K</b><span>monthly visits</span><small>Source: Similarweb</small></div>
+        <div class="sb"><b>4.8</b><span>rating from 29,339 reviews</span><small>Source: sheko.com header</small></div>
+        <div class="sb"><b>11M</b><span>meals sold</span><small>Source: Starter-Set page</small></div>
+        <div class="sb" style="border-color:var(--org)"><b style="color:var(--org)">3</b><span>flavour picks before the cart</span><small>Source: Starter-Set page</small></div>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="border:8px solid #2a2a2a;border-radius:30px;overflow:hidden;height:520px;background:#111"><img src="../assets/sheko/m_pdp.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block"></div>
+      <div class="cap" style="color:#9a9a9a;margin-top:12px;text-align:center">Starter-Set, first mobile screen</div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">04</span></div>
+</section>
+
+<!-- 5 TESTS -->
+<section class="lt">
+  <div class="in">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><span class="lab v">04 . First three tests</span><h2>Three tests.<em>No opinions.</em></h2></div>
+      <p style="max-width:330px;font-size:15px;line-height:1.55;color:#555;text-align:right">Every idea runs as an A/B test first. Only the winners ship.</p>
+    </div>
+    <div class="rows" style="margin-top:24px">
+      <div class="row" style="grid-template-columns:60px 300px 1fr 250px;gap:22px;padding:20px 0"><span class="wide" style="font-size:15px;color:var(--pur)">A</span><h3 style="font-size:19px;line-height:1.15">Proof first homepage</h3><p style="font-size:15px;line-height:1.5">Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.</p><p style="font-size:13px;line-height:1.5;color:#555"><span class="cap" style="display:block;color:#000;font-weight:700;font-size:10px">Measured by</span>Clicks to product pages, revenue per visitor</p></div>
+      <div class="row" style="grid-template-columns:60px 300px 1fr 250px;gap:22px;padding:20px 0"><span class="wide" style="font-size:15px;color:var(--pur)">B</span><h3 style="font-size:19px;line-height:1.15">One tap Starter-Set</h3><p style="font-size:15px;line-height:1.5">Preselect the three most popular flavours, put price and button in the first mobile screen.</p><p style="font-size:13px;line-height:1.5;color:#555"><span class="cap" style="display:block;color:#000;font-weight:700;font-size:10px">Measured by</span>Mobile add to cart rate</p></div>
+      <div class="row" style="grid-template-columns:60px 300px 1fr 250px;gap:22px;padding:20px 0"><span class="wide" style="font-size:15px;color:var(--pur)">C</span><h3 style="font-size:19px;line-height:1.15">The week four bridge</h3><p style="font-size:15px;line-height:1.5">A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.</p><p style="font-size:13px;line-height:1.5;color:#555"><span class="cap" style="display:block;color:#000;font-weight:700;font-size:10px">Measured by</span>Repeat orders</p></div>
+    </div>
+    <div style="margin-top:30px;background:#000;color:#fff;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;padding:22px 28px">
+      <div class="wide" style="font-size:40px;color:var(--lime);line-height:1">+0.1 = ~386</div>
+      <p style="font-size:16px;line-height:1.5">At 386,000 visits a month, every 0.1 point of conversion rate is about <b style="color:var(--lime)">386 more orders a month</b>, from traffic you already have.</p>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">05</span></div>
+</section>
+
+<!-- 6 WHO WE ARE -->
+<section class="ch">
+  <div class="in" style="display:grid;grid-template-columns:1fr 1fr;gap:64px">
+    <div>
+      <span class="lab o">05 . Who we are</span>
+      <h2>Only conversion.<em>Nothing else.</em></h2>
+      <p style="font-size:16.5px;line-height:1.6;color:#cfcfcf;margin-top:22px">No ads. No logos. No "brand refresh". ConvertPolo runs the whole experimentation program for e-commerce and D2C brands, from research and hypotheses to design, development, QA and analysis, as an extension of your team.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px">
+        <div class="sb"><b>120+</b><span>online shops under CRO management</span></div>
+        <div class="sb"><b style="font-size:40px">VWO</b><span>official agency partner</span></div>
+        <div class="sb"><b>M3</b><span>results typically from month 3</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="rows" style="margin-top:4px">
+        <div class="row" style="grid-template-columns:84px 1fr;gap:20px;padding:20px 0;align-items:center"><img src="../assets/team/anirban.png" style="width:84px;height:84px;object-fit:cover;object-position:top;filter:grayscale(1)"><div><div class="wide" style="font-size:17px">Anirban Chakraborty</div><div class="cap" style="color:var(--lime);margin-top:6px">Founder &amp; CEO</div></div></div>
+        <div class="row" style="grid-template-columns:84px 1fr;gap:20px;padding:20px 0;align-items:center"><img src="../assets/team/saurabh.png" style="width:84px;height:84px;object-fit:cover;object-position:top;filter:grayscale(1)"><div><div class="wide" style="font-size:17px">Saurabh Patwa</div><div class="cap" style="color:var(--lime);margin-top:6px">Co-Founder</div></div></div>
+        <div class="row" style="grid-template-columns:84px 1fr;gap:20px;padding:20px 0;align-items:center"><img src="../assets/team/ansuya.png" style="width:84px;height:84px;object-fit:cover;object-position:top;filter:grayscale(1)"><div><div class="wide" style="font-size:17px">Ansuya Poudel</div><div class="cap" style="color:var(--lime);margin-top:6px">Brand &amp; Growth</div></div></div>
+        <div class="row" style="grid-template-columns:84px 1fr;gap:20px;padding:20px 0;align-items:center"><img src="../assets/team/ankita.png" style="width:84px;height:84px;object-fit:cover;object-position:top;filter:grayscale(1)"><div><div class="wide" style="font-size:17px">Ankita Daga</div><div class="cap" style="color:var(--lime);margin-top:6px">UX UI Design Lead</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">06</span></div>
+</section>
+
+<!-- 7 PROCESS -->
+<section class="gr">
+  <div class="in">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><span class="lab v">06 . Process</span><h2>Six steps.<em>On repeat.</em></h2></div>
+      <p style="max-width:380px;font-size:15px;line-height:1.55;color:#444;text-align:right">Baseline first. Then value on top of value. Every cycle starts where the last winner ended.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px;align-items:end;height:250px;margin-top:34px">
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="background:var(--pur);color:#fff;height:90px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">Baseline</div></div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="background:var(--lime);height:22px;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-weight:600">+Insight</div><div style="background:var(--pur);color:#fff;height:90px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">Baseline</div></div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="background:var(--lime);height:44px;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-weight:600">+Hypotheses</div><div style="background:var(--pur);color:#fff;height:90px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">Baseline</div></div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="background:var(--lime);height:70px;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-weight:600">+Variants</div><div style="background:var(--pur);color:#fff;height:90px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">Baseline</div></div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="background:var(--lime);height:104px;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-weight:600">+Winners</div><div style="background:var(--pur);color:#fff;height:90px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">Baseline</div></div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="background:#000;color:var(--lime);height:150px;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-weight:600;letter-spacing:.14em">NEW BASELINE</div><div style="background:var(--pur);color:#fff;height:90px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">Baseline</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:10px;font-size:11px;color:#555"><span>Time</span><i style="flex:1;height:1px;background:#555"></i><span>&rarr;</span></div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:16px">
+      <div><div class="wide" style="font-size:14px">01 Research</div><p style="font-size:12.5px;line-height:1.45;color:#444;margin-top:6px">Data, heatmaps, recordings, the store read like a buyer.</p></div>
+      <div><div class="wide" style="font-size:14px">02 Hypotheses</div><p style="font-size:12.5px;line-height:1.45;color:#444;margin-top:6px">Each idea gets a reason and a metric.</p></div>
+      <div><div class="wide" style="font-size:14px">03 Design &amp; build</div><p style="font-size:12.5px;line-height:1.45;color:#444;margin-top:6px">Variants designed and coded in house.</p></div>
+      <div><div class="wide" style="font-size:14px">04 QA &amp; launch</div><p style="font-size:12.5px;line-height:1.45;color:#444;margin-top:6px">Checked on every device before traffic hits it.</p></div>
+      <div><div class="wide" style="font-size:14px">05 Analyze</div><p style="font-size:12.5px;line-height:1.45;color:#444;margin-top:6px">Winners decided by data, not by taste.</p></div>
+      <div><div class="wide" style="font-size:14px">06 Iterate</div><p style="font-size:12.5px;line-height:1.45;color:#444;margin-top:6px">The winner becomes the new baseline.</p></div>
+    </div>
+  </div>
+    <div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">07</span></div>
+</section>
+
+<!-- 8 CASES (ROWS) -->
+<section class="lt">
+  <div class="in" style="top:46px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><span class="lab o" style="margin-bottom:12px">07 . Cases</span><h2 style="font-size:46px">Receipts.<em>Not promises.</em></h2></div>
+      <div class="cap" style="color:#777;text-align:right;line-height:1.7">Client . Sector<br>Story . Result</div>
+    </div>
+    <div class="rows" style="margin-top:18px">
+      <div class="row" style="grid-template-columns:76px 220px 1fr 230px 100px;gap:20px;padding:11px 0;align-items:center"><img src="../assets/cs/anothersole_big.jpg" style="width:76px;height:48px;object-fit:cover"><div><div class="wide" style="font-size:16px">Anothersole</div><div class="cap" style="color:#777;font-size:9.5px;margin-top:5px">D2C . Footwear</div></div><p style="font-size:14.5px;line-height:1.4">Rebuilt product discovery and the shopping journey.</p><div><span class="wide" style="font-size:24px">+185%</span><div style="font-size:12px;color:#555">revenue</div></div><a class="arrow" href="https://convertpolo.com/casestudy/" target="_blank">Case &rarr;</a></div>
+      <div class="row" style="grid-template-columns:76px 220px 1fr 230px 100px;gap:20px;padding:11px 0;align-items:center"><img src="../assets/cs/roshambo_big.jpg" style="width:76px;height:48px;object-fit:cover"><div><div class="wide" style="font-size:16px">Roshambo</div><div class="cap" style="color:#777;font-size:9.5px;margin-top:5px">D2C . Eyewear</div></div><p style="font-size:14.5px;line-height:1.4">Targeted UX experiments across the store.</p><div><span class="wide" style="font-size:24px">+36.13%</span><div style="font-size:12px;color:#555">revenue per visitor</div></div><a class="arrow" href="https://convertpolo.com/casestudy/" target="_blank">Case &rarr;</a></div>
+      <div class="row" style="grid-template-columns:76px 220px 1fr 230px 100px;gap:20px;padding:11px 0;align-items:center"><img src="../assets/cs/theater_big.jpg" style="width:76px;height:48px;object-fit:cover"><div><div class="wide" style="font-size:16px">Theater</div><div class="cap" style="color:#777;font-size:9.5px;margin-top:5px">Fashion</div></div><p style="font-size:14.5px;line-height:1.4">Mobile experience redesign.</p><div><span class="wide" style="font-size:24px">+38%</span><div style="font-size:12px;color:#555">revenue per visitor</div></div><a class="arrow" href="https://convertpolo.com/casestudy/" target="_blank">Case &rarr;</a></div>
+      <div class="row" style="grid-template-columns:76px 220px 1fr 230px 100px;gap:20px;padding:11px 0;align-items:center"><img src="../assets/cs/beyondbyvera_big.png" style="width:76px;height:48px;object-fit:cover"><div><div class="wide" style="font-size:16px">Beyond by Vera</div><div class="cap" style="color:#777;font-size:9.5px;margin-top:5px">Premium fashion</div></div><p style="font-size:14.5px;line-height:1.4">Slide-out cart and a timed recovery popup.</p><div><span class="wide" style="font-size:24px">+53%</span><div style="font-size:12px;color:#555">conversion</div></div><a class="arrow" href="https://convertpolo.com/casestudy/" target="_blank">Case &rarr;</a></div>
+      <div class="row" style="grid-template-columns:76px 220px 1fr 230px 100px;gap:20px;padding:11px 0;align-items:center"><div style="width:76px;height:48px;background:#000;color:var(--lime);display:flex;align-items:center;justify-content:center" class="wide"><span style="font-size:13px">SP</span></div><div><div class="wide" style="font-size:16px">Sparify</div><div class="cap" style="color:#777;font-size:9.5px;margin-top:5px">Motorcycle gear</div></div><p style="font-size:14.5px;line-height:1.4">Spec-led product pages, delivery dates and scarcity nudges.</p><div><span class="wide" style="font-size:24px">+52%</span><div style="font-size:12px;color:#555">revenue</div></div><a class="arrow" href="https://convertpolo.com/casestudy/" target="_blank">Case &rarr;</a></div>
+      <div class="row" style="grid-template-columns:76px 220px 1fr 230px 100px;gap:20px;padding:11px 0;align-items:center"><div style="width:76px;height:48px;background:var(--pur);color:#fff;display:flex;align-items:center;justify-content:center" class="wide"><span style="font-size:13px">TP</span></div><div><div class="wide" style="font-size:16px">TimesPro</div><div class="cap" style="color:#777;font-size:9.5px;margin-top:5px">Lead generation</div></div><p style="font-size:14.5px;line-height:1.4">More visitors pressing the one button that matters.</p><div><span class="wide" style="font-size:24px">+180%</span><div style="font-size:12px;color:#555">Apply Nows</div></div><a class="arrow" href="https://convertpolo.com/casestudy/" target="_blank">Case &rarr;</a></div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">08</span></div>
+</section>
+
+<!-- 9 LOGO WALL -->
+<section class="dk">
+  <div class="in">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><span class="lab p">08 . Clients</span><h2>They tested.<em>They grew.</em></h2></div>
+      <div style="display:flex;align-items:center;gap:16px"><img src="../assets/vwo.png" alt="VWO" style="height:40px;filter:brightness(0) invert(1)"><span class="cap" style="color:#bbb;line-height:1.5">Official<br>agency partner</span></div>
+    </div>
+    <p style="font-size:16px;line-height:1.55;color:#bdbdbd;max-width:640px;margin-top:18px">120+ online shops under CRO management. Different products, same rule: nothing ships until a test says so. What a coincidence that they keep growing.</p>
+    <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid #333;border-left:1px solid #333;margin-top:28px">
+      <div class="lg"><img src="../assets/clients/l1.png"></div><div class="lg"><img src="../assets/clients/l2.png"></div><div class="lg"><img src="../assets/clients/l3.png"></div><div class="lg"><img src="../assets/clients/l4.png"></div><div class="lg"><img src="../assets/clients/l5.png"></div><div class="lg"><img src="../assets/clients/l6.png"></div>
+      <div class="lg"><img src="../assets/clients/l7.png"></div><div class="lg"><img src="../assets/clients/l8.png"></div><div class="lg"><img src="../assets/clients/l9.png"></div><div class="lg"><img src="../assets/clients/l10.png"></div><div class="lg"><img src="../assets/clients/l11.png"></div><div class="lg"><img src="../assets/clients/l12.png"></div>
+      <div class="lg"><img src="../assets/clients/l14.png"></div><div class="lg"><img src="../assets/clients/l15.png"></div><div class="lg"><img src="../assets/clients/l16.png"></div><div class="lg"><img src="../assets/clients/l17.png"></div><div class="lg"><img src="../assets/clients/l18.png"></div><div class="lg"><img src="../assets/clients/l19.png"></div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">09</span></div>
+</section>
+
+<!-- 10 CTA -->
+<section class="dk">
+  <div class="in" style="display:grid;grid-template-columns:1fr 360px;gap:70px;align-items:center">
+    <div>
+      <span class="lab l">09 . Next step</span>
+      <h2 style="font-size:78px;line-height:.95">Book a call.<em>30 minutes.</em></h2>
+      <p style="font-size:18px;line-height:1.6;color:#cfcfcf;max-width:600px;margin-top:26px">Thirty minutes on sheko.com. We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.</p>
+      <div style="display:flex;gap:12px;margin-top:32px"><a class="btn lime" style="font-size:17px;padding:16px 24px" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call &rarr;</a><a class="btn out" style="font-size:17px;padding:14.5px 22.5px" href="#/1">See what we saw</a></div>
+    </div>
+    <div style="position:relative">
+      <div class="badge" style="left:-70px;top:-50px;color:#fff;z-index:2">
+        <svg viewBox="0 0 150 150"><defs><path id="cp2" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs><circle cx="75" cy="75" r="73" fill="#000" stroke="#fff" stroke-width="1.2" stroke-dasharray="3 4"/><text font-family="Inter" font-size="10.5" letter-spacing="1" fill="#fff"><textPath href="#cp2" textLength="360" lengthAdjust="spacing">ONLY WINNERS SHIP . EVERY CHANGE TESTED . </textPath></text></svg>
+        <div class="c" style="color:var(--lime)">Real<br>growth</div>
+      </div>
+      <div style="background:var(--pink);height:400px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden"><img src="../assets/team/ansuya.png" alt="Ansuya Poudel" style="height:380px;width:auto;display:block"></div>
+      <div style="background:var(--lime);color:#000;padding:14px 18px"><div class="wide" style="font-size:16px">Ansuya Poudel</div><div class="cap" style="margin-top:5px;font-weight:600">Brand &amp; Growth, ConvertPolo</div></div>
+    </div>
+  </div>
+  <div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo x SHEKO</span><span class="pg">10</span></div>
+</section>
+
+</div></div>
+<style>.lg{border-right:1px solid #333;border-bottom:1px solid #333;height:118px;display:flex;overflow:hidden;align-items:center;justify-content:center}.lg img{height:100px;width:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.8}</style>
+<script src="../vendor/reveal.js"></script>
+<script>Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false});</script>
+</body></html>

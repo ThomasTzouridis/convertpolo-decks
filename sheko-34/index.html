@@ -1,0 +1,249 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>ConvertPolo for SHEKO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=Archivo:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../vendor/reset.css"><link rel="stylesheet" href="../vendor/reveal.css">
+<style>
+:root{--blk:#000;--ch:#222;--ow:#F6F6F6;--lg:#E6E6E6;--lime:#D8E01E;--pur:#8A6E9A;--pink:#E9D5DF;--org:#E8641A;--ink:#111}
+html,body{background:#000}
+.reveal{font-family:Inter,Arial,sans-serif;color:var(--ink)}
+.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;overflow:hidden}
+.reveal .slides section.dk{background:var(--blk);color:#fff}
+.reveal .slides section.ch{background:var(--ch);color:#fff}
+.reveal .slides section.lt{background:var(--ow);color:var(--ink)}
+.reveal .slides section.gr{background:var(--lg);color:var(--ink)}
+.in{position:absolute;left:80px;right:80px;top:58px;bottom:70px}
+.reveal h1,.reveal h2,.reveal h3{margin:0;text-transform:uppercase;font-family:Unbounded,Arial,sans-serif;font-weight:800;letter-spacing:-.01em;line-height:1.02}
+.reveal p{margin:0}
+.man{font-size:58px}
+.man i{display:block;font-style:italic;color:var(--lime)}
+.lt .man i,.gr .man i{color:var(--ink);background:var(--lime);display:inline-block;padding:0 14px 4px;margin-top:6px;font-style:italic}
+.lab{font-family:Archivo,Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px;display:flex;gap:14px;align-items:center}
+.lab .ln{color:var(--org)}
+.lab .lt2{opacity:.7}
+.foot{position:absolute;left:80px;right:80px;bottom:24px;display:flex;gap:16px;align-items:center;font-family:Archivo,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.foot img{height:16px}.foot .pg{margin-left:auto;margin-right:60px}
+.btn{display:inline-block;font-family:Archivo,Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;padding:16px 30px;font-size:16px}
+.btn.lime{background:var(--lime);color:#000}
+.btn.out{border:1.5px solid currentColor;color:inherit}
+.bar{border-left:3px solid var(--lime);padding-left:16px}
+.lt .bar,.gr .bar{border-left-color:var(--ink)}
+.lt .bar.l,.gr .bar.l{border-left-color:var(--lime)}
+/* badge */
+.badge{position:absolute;width:170px;height:170px}
+.badge svg{width:100%;height:100%;animation:spin 22s linear infinite}
+.badge .core{position:absolute;inset:0;display:grid;place-items:center;font-family:Unbounded;font-weight:800;font-size:15px;text-align:center;line-height:1.1}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* cover */
+.s-cover .top{display:flex;justify-content:space-between;align-items:center}
+.s-cover .top img{height:24px}
+.s-cover h1{font-size:84px;margin-top:140px;line-height:.98}
+.s-cover h1 i{display:block;color:var(--lime);font-style:italic}
+.s-cover .row{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end}
+.s-cover .prep{font-size:18px;line-height:1.5;color:#ddd}
+.s-cover .prep b{color:#fff;font-weight:600}
+.s-cover .shk{height:30px;filter:brightness(0) invert(1);margin-bottom:14px;display:block}
+.s-cover .btns{display:flex;gap:14px}
+.s-cover .badge{right:0;top:330px;color:#fff}
+/* saw */
+.s-saw .g{display:grid;grid-template-columns:1fr 540px;gap:60px;margin-top:34px}
+.s-saw .txt p{font-size:19px;line-height:1.55;margin-bottom:18px;color:#333}
+.s-saw .txt p.key{font-size:20px;color:#000;font-weight:500;background:linear-gradient(transparent 62%,var(--lime) 62%);display:inline;line-height:1.7}
+.s-saw .pic{position:relative}
+.s-saw .pic img{width:100%;height:370px;object-fit:cover;object-position:top;display:block;border:1px solid #ccc}
+.s-saw .pic span{position:absolute;left:0;bottom:-26px;font-family:Archivo;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--pur)}
+/* findings */
+.s-find .g{display:grid;grid-template-columns:1fr 300px;gap:56px;margin-top:30px}
+.s-find .rows>div{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:19px 0;border-top:1px solid #444}
+.s-find .rows>div:last-child{border-bottom:1px solid #444}
+.s-find .rows .ln{font-family:Unbounded;font-weight:700;color:var(--lime);font-size:15px;padding-top:2px}
+.s-find .rows h3{font-size:15px;letter-spacing:.02em;margin-bottom:6px}
+.s-find .rows p{font-size:14.5px;line-height:1.5;color:#c9c9c9}
+.s-find .stats{display:grid;gap:20px;align-content:start}
+.s-find .st b{display:block;font-family:Unbounded;font-weight:800;font-size:40px;line-height:1;color:var(--lime)}
+.s-find .st span{display:block;font-size:14px;margin-top:6px}
+.s-find .st small{display:block;font-family:Archivo;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);opacity:.8;margin-top:4px}
+/* tests */
+.s-tests .g{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid #111}
+.s-tests .t{padding:24px 28px 0 0}
+.s-tests .t+.t{padding-left:28px;border-left:1px solid #cfcfcf}
+.s-tests .t .n{font-family:Archivo;font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--org)}
+.s-tests .t h3{font-size:22px;margin:12px 0 14px;line-height:1.1}
+.s-tests .t p{font-size:16px;line-height:1.55;color:#333;min-height:100px}
+.s-tests .t .m{margin-top:16px;font-size:14px;font-weight:600}
+.s-tests .t .m span{display:block;font-family:Archivo;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--pur);font-weight:600;margin-bottom:4px}
+.s-tests .note{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;background:#000;color:#fff;padding:20px 28px}
+.s-tests .note p{font-family:Unbounded;font-weight:700;font-size:17px;text-transform:uppercase}
+.s-tests .note p i{color:var(--lime);font-style:italic}
+/* math */
+.s-math .big{display:flex;align-items:flex-end;gap:40px;margin-top:40px}
+.s-math .big b{font-family:Unbounded;font-weight:900;font-size:230px;line-height:.82;color:var(--lime);letter-spacing:-.04em}
+.s-math .big div{padding-bottom:12px}
+.s-math .big div p{font-family:Unbounded;font-weight:700;font-size:26px;text-transform:uppercase;line-height:1.15}
+.s-math .big div small{display:block;margin-top:12px;font-size:16px;color:#aaa}
+.s-math .line{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1.6fr 1fr;gap:60px;align-items:end;border-top:1px solid #333;padding-top:26px}
+.s-math .line p{font-size:20px;line-height:1.5;color:#ddd}
+.s-math .line .bar p{font-size:15px;color:#bbb}
+.s-math .line .bar b{display:block;font-family:Unbounded;font-size:30px;color:#fff;margin-bottom:6px}
+/* who */
+.s-who .g{display:grid;grid-template-columns:1fr 1.08fr;gap:56px;margin-top:30px}
+.s-who .lead{font-size:18px;line-height:1.55;color:#333;max-width:520px}
+.s-who .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.s-who .facts b{display:block;white-space:nowrap;font-family:Unbounded;font-weight:800;font-size:24px;line-height:1}
+.s-who .facts span{display:block;font-size:13px;line-height:1.35;margin-top:8px;color:#444}
+.s-who .team{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.s-who .m{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:#fff;padding:14px}
+.s-who .m img{width:110px;height:110px;object-fit:cover;object-position:top;filter:grayscale(1);display:block}
+.s-who .m b{display:block;font-family:Unbounded;font-weight:700;font-size:13px;text-transform:uppercase;line-height:1.25}
+.s-who .m span{display:block;font-family:Archivo;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pur);margin-top:6px;line-height:1.4}
+.logos{position:absolute;left:0;right:0;bottom:0;overflow:hidden;border-top:1px solid #d6d6d6;padding-top:20px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logos .track{display:flex;gap:56px;width:max-content;animation:cl 50s linear infinite;align-items:center}
+.logos img{height:38px;width:auto;filter:grayscale(1) contrast(1.3)}
+@keyframes cl{to{transform:translateX(-50%)}}
+/* process */
+.s-proc .lead{font-size:19px;line-height:1.55;color:#ccc;max-width:760px;margin-top:22px}
+.s-proc .steps{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:54px;border-top:1px solid #444}
+.s-proc .step{padding:26px 18px 30px 0}
+.s-proc .step+.step{padding-left:18px;border-left:1px solid #444}
+.s-proc .step .ln{font-family:Unbounded;font-weight:800;font-size:46px;color:var(--lime);line-height:1}
+.s-proc .step b{display:block;font-family:Unbounded;font-weight:700;text-transform:uppercase;font-size:15px;margin:26px 0 12px;line-height:1.25;min-height:38px}
+.s-proc .step p{font-size:16px;line-height:1.5;color:#bdbdbd}
+.s-proc .badge{right:0;top:-10px;color:#fff;width:150px;height:150px}
+/* cases */
+.s-cases .rows{margin-top:24px;border-top:1px solid #111}
+.s-cases .r{display:grid;grid-template-columns:150px 230px 1fr 230px 100px;gap:24px;align-items:center;padding:16px 0;border-bottom:1px solid #cfcfcf;text-decoration:none;color:inherit}
+.s-cases .r img{width:150px;height:80px;object-fit:cover;object-position:top;display:block}
+.s-cases .r h3{font-size:17px}
+.s-cases .r small{display:block;font-family:Archivo;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--pur);margin-top:6px}
+.s-cases .r p{font-size:15px;line-height:1.45;color:#222}
+.s-cases .r .k{font-family:Unbounded;font-weight:800;font-size:30px;line-height:1;background:var(--lime);display:inline-block;padding:4px 8px}
+.s-cases .r .k + span{display:block;font-size:12.5px;margin-top:6px;color:#444}
+.s-cases .r .go{font-family:Archivo;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-align:right}
+.s-cases .more{display:flex;gap:48px;margin-top:22px;font-size:16px;color:#333}
+.s-cases .more b{font-family:Unbounded;font-weight:800;margin-right:8px}
+/* cta */
+.s-cta h2{font-size:92px;line-height:.98;margin-top:56px}
+.s-cta h2 i{display:block;color:var(--lime);font-style:italic}
+.s-cta .g{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:end}
+.s-cta .g p{font-size:20px;line-height:1.55;color:#ddd;margin-bottom:28px}
+.s-cta .btns{display:flex;gap:14px}
+.s-cta .card{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:end;border-left:3px solid var(--lime);padding-left:20px}
+.s-cta .card img{width:150px;height:150px;object-fit:cover;object-position:top;filter:grayscale(1);display:block}
+.s-cta .card b{display:block;font-family:Unbounded;font-weight:700;text-transform:uppercase;font-size:17px}
+.s-cta .card span{display:block;font-size:14px;color:#bbb;margin-top:6px;line-height:1.5}
+.s-cta .badge{right:0;top:180px;color:#fff;width:150px;height:150px}
+.reveal .progress{color:var(--lime);height:4px}
+.reveal .controls{color:var(--lime)}
+</style></head><body><div class="reveal"><div class="slides">
+
+<section class="dk s-cover"><div class="in">
+<div class="top"><img src="../assets/logo_white.svg" alt="ConvertPolo"><span class="lab" style="margin:0"><span class="n">CRO</span><span class="lt2">A pitch for SHEKO</span></span></div>
+<h1>Test everything.<i>Guess nothing.</i></h1>
+<div class="badge"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5"/><defs><path id="c1" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text font-family="Archivo" font-size="12.5" font-weight="700" fill="currentColor" textLength="458" lengthAdjust="spacing"><textPath href="#c1">EVERY CHANGE PROVEN · ONLY WINNERS SHIP · </textPath></text></svg><div class="core">A/B<br>ONLY</div></div>
+<div class="row"><div><img class="shk" src="../assets/sheko/logo.png" alt="SHEKO"><p class="prep">Prepared for <b>Dustin Fleck</b>, Co-Founder, SHEKO</p></div>
+<div class="btns"><a class="btn out" href="#/1">What we saw</a><a class="btn lime" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call</a></div></div>
+</div></section>
+
+<section class="lt s-saw"><div class="in">
+<p class="lab"><span class="ln">01</span><span class="lt2">What we saw at SHEKO</span></p>
+<h2 class="man">Nobody buys the shake.<br><i>They buy week four.</i></h2>
+<div class="g"><div class="txt">
+<p>Nobody buys a shake plan for the shake. They buy the four weeks they hope it gets them through.</p>
+<p>So the first screen has one job: show that it works for people like them, before they have to decide anything.</p>
+<p class="key">Your strongest answer, 11,000,000 meals sold and more than 10,000 Starter-Sets bought in two months, only shows up on the product page. The homepage opens with a question and two equal buttons.</p>
+</div><div class="pic"><img src="../assets/sheko/home.jpg" alt=""><span>sheko.com, homepage</span></div></div>
+</div><div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">02</span></div></section>
+
+<section class="ch s-find"><div class="in">
+<p class="lab"><span class="ln">02</span><span class="lt2">Findings</span></p>
+<h2 class="man" style="font-size:50px">The proof is there.<i>It is just hiding.</i></h2>
+<div class="g"><div class="rows">
+<div><span class="ln">01</span><div><h3>Proof sits one click deep</h3><p>The homepage opens on "Balance gewinnen oder Gewicht verlieren?" with two equal buttons. The 11,000,000 meals and 10,000 Starter-Sets only appear after a click.</p></div></div>
+<div><span class="ln">02</span><div><h3>Three choices before the cart</h3><p>Three separate flavour picks before the Starter-Set goes in the cart. On a phone, the first screen shows no price and no button.</p></div></div>
+<div><span class="ln">03</span><div><h3>Week four has no next step</h3><p>A four week program with no subscribe or reorder option on its page, although SHEKO runs subscriptions (Abo verwalten in the footer).</p></div></div>
+<div><span class="ln">04</span><div><h3>The discount waits at the bottom</h3><p>The secret discount and the 60 page metabolism guide sit at the very end of the homepage, after the reviews.</p></div></div>
+</div><div class="stats">
+<div class="st bar"><b>386K</b><span>monthly visits</span><small>Similarweb</small></div>
+<div class="st bar"><b>4.8</b><span>rating from 29,339 reviews</span><small>sheko.com header</small></div>
+<div class="st bar"><b>11M</b><span>meals sold</span><small>Starter-Set page</small></div>
+<div class="st bar"><b>3</b><span>flavour picks before the cart</span><small>Starter-Set page</small></div>
+</div></div>
+</div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">03</span></div></section>
+
+<section class="lt s-tests"><div class="in">
+<p class="lab"><span class="ln">03</span><span class="lt2">The first three tests</span></p>
+<h2 class="man">Three tests.<br><i>Zero opinions.</i></h2>
+<div class="g">
+<div class="t"><span class="n">TEST 01</span><h3>Proof first homepage</h3><p>Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.</p><p class="m"><span>We measure</span>Clicks to product pages, revenue per visitor</p></div>
+<div class="t"><span class="n">TEST 02</span><h3>One tap Starter-Set</h3><p>Preselect the three most popular flavours, put price and button in the first mobile screen.</p><p class="m"><span>We measure</span>Mobile add to cart rate</p></div>
+<div class="t"><span class="n">TEST 03</span><h3>The week four bridge</h3><p>A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.</p><p class="m"><span>We measure</span>Repeat orders</p></div>
+</div>
+<div class="note"><p>Every idea runs as an A/B test first. <i>Only the winners ship.</i></p><a class="btn lime" style="padding:10px 18px;font-size:13px" href="#/4">The math →</a></div>
+</div><div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">04</span></div></section>
+
+<section class="dk s-math"><div class="in">
+<p class="lab"><span class="ln">04</span><span class="lt2">The math</span></p>
+<h2 class="man" style="font-size:50px">Small decimal.<i>Big number.</i></h2>
+<div class="big"><b>386</b><div><p>More orders.<br>Every month.</p><small>For every 0.1 point of conversion rate.</small></div></div>
+<div class="line"><p>At 386,000 visits a month, every 0.1 point of conversion rate is about 386 more orders a month, from traffic you already have. No new ad budget. Magic. Well, testing.</p>
+<div class="bar"><b>386K</b><p>monthly visits already on sheko.com</p></div></div>
+</div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">05</span></div></section>
+
+<section class="lt s-who"><div class="in">
+<p class="lab"><span class="ln">05</span><span class="lt2">Who we are</span></p>
+<h2 class="man">The anti guesswork<br><i>agency.</i></h2>
+<div class="g"><div>
+<p class="lead">ConvertPolo does one thing: conversion rate optimization. No hunches, no redesigns for taste. Every change earns its place in an A/B test, or it does not ship.</p>
+<div class="facts"><div class="bar l"><b>120+</b><span>online shops under CRO management</span></div><div class="bar l"><b>VWO</b><span>official agency partner</span></div><div class="bar l"><b>Month 3</b><span>when results typically show</span></div></div>
+</div><div class="team">
+<div class="m"><img src="../assets/team/anirban.png" alt=""><div><b>Anirban Chakraborty</b><span>Founder &amp; CEO</span></div></div>
+<div class="m"><img src="../assets/team/saurabh.png" alt=""><div><b>Saurabh Patwa</b><span>Co-Founder</span></div></div>
+<div class="m"><img src="../assets/team/ansuya.png" alt=""><div><b>Ansuya Poudel</b><span>Brand &amp; Growth</span></div></div>
+<div class="m"><img src="../assets/team/ankita.png" alt=""><div><b>Ankita Daga</b><span>UX UI Design Lead</span></div></div>
+</div></div>
+<div class="logos"><div class="track">
+<img src="../assets/clients/l1.png" alt=""><img src="../assets/clients/l2.png" alt=""><img src="../assets/clients/l3.png" alt=""><img src="../assets/clients/l4.png" alt=""><img src="../assets/clients/l5.png" alt=""><img src="../assets/clients/l6.png" alt=""><img src="../assets/clients/l7.png" alt=""><img src="../assets/clients/l8.png" alt=""><img src="../assets/clients/l9.png" alt=""><img src="../assets/clients/l10.png" alt=""><img src="../assets/clients/l11.png" alt=""><img src="../assets/clients/l12.png" alt=""><img src="../assets/clients/l14.png" alt=""><img src="../assets/clients/l15.png" alt=""><img src="../assets/clients/l16.png" alt=""><img src="../assets/clients/l17.png" alt=""><img src="../assets/clients/l18.png" alt=""><img src="../assets/clients/l19.png" alt=""><img src="../assets/vwo.png" alt="">
+<img src="../assets/clients/l1.png" alt=""><img src="../assets/clients/l2.png" alt=""><img src="../assets/clients/l3.png" alt=""><img src="../assets/clients/l4.png" alt=""><img src="../assets/clients/l5.png" alt=""><img src="../assets/clients/l6.png" alt=""><img src="../assets/clients/l7.png" alt=""><img src="../assets/clients/l8.png" alt=""><img src="../assets/clients/l9.png" alt=""><img src="../assets/clients/l10.png" alt=""><img src="../assets/clients/l11.png" alt=""><img src="../assets/clients/l12.png" alt=""><img src="../assets/clients/l14.png" alt=""><img src="../assets/clients/l15.png" alt=""><img src="../assets/clients/l16.png" alt=""><img src="../assets/clients/l17.png" alt=""><img src="../assets/clients/l18.png" alt=""><img src="../assets/clients/l19.png" alt=""><img src="../assets/vwo.png" alt="">
+</div></div>
+</div><div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">06</span></div></section>
+
+<section class="ch s-proc"><div class="in">
+<p class="lab"><span class="ln">06</span><span class="lt2">How we work</span></p>
+<h2 class="man">No hunches.<i>Only hypotheses.</i></h2>
+<div class="badge"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5"/><defs><path id="c2" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text font-family="Archivo" font-size="12.5" font-weight="700" fill="currentColor" textLength="458" lengthAdjust="spacing"><textPath href="#c2">RESEARCH · TEST · ANALYZE · ITERATE · </textPath></text></svg><div class="core" style="color:var(--lime);font-size:44px">∞</div></div>
+<p class="lead">A loop, not a launch. Each round feeds the next, so the store keeps getting better while everyone else argues about button colours.</p>
+<div class="steps">
+<div class="step"><span class="ln">01</span><b>Research</b><p>Data, heatmaps, recordings and the real customer journey.</p></div>
+<div class="step"><span class="ln">02</span><b>Hypo&shy;theses</b><p>Clear, testable ideas, ranked by expected impact.</p></div>
+<div class="step"><span class="ln">03</span><b>Design and build</b><p>Variants designed and coded by our own team.</p></div>
+<div class="step"><span class="ln">04</span><b>QA and launch</b><p>Checked across devices, then live as an A/B test.</p></div>
+<div class="step"><span class="ln">05</span><b>Analyze</b><p>Results read on revenue, not on gut feeling.</p></div>
+<div class="step"><span class="ln">06</span><b>Iterate</b><p>Winners ship. Learnings feed the next round.</p></div>
+</div>
+</div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">07</span></div></section>
+
+<section class="lt s-cases"><div class="in">
+<p class="lab"><span class="ln">07</span><span class="lt2">Cases</span></p>
+<h2 class="man" style="font-size:50px">Results.<i>Not reports.</i></h2>
+<div class="rows">
+<a class="r" href="https://convertpolo.com/casestudies/anothersole-product-discovery-improvement/" target="_blank"><img src="../assets/cs/anothersole_big.jpg" alt=""><div><h3>Anothersole</h3><small>Footwear D2C</small></div><p>Rebuilt product discovery and the shopping journey.</p><div><span class="k">+185%</span><span>revenue</span></div><span class="go">Case →</span></a>
+<a class="r" href="https://convertpolo.com/casestudies/how-roshambo-boosted-revenue-per-visitor-by-36-13-with-targeted-ux-experiments/" target="_blank"><img src="../assets/cs/roshambo_big.jpg" alt=""><div><h3>Roshambo</h3><small>Eyewear</small></div><p>Targeted UX experiments across the store.</p><div><span class="k">+36.13%</span><span>revenue per visitor</span></div><span class="go">Case →</span></a>
+<a class="r" href="https://convertpolo.com/casestudies/theater-mobile-experience-redesign/" target="_blank"><img src="../assets/cs/theater_big.jpg" alt=""><div><h3>Theater</h3><small>Fashion</small></div><p>Mobile experience redesign.</p><div><span class="k">+38%</span><span>revenue per visitor</span></div><span class="go">Case →</span></a>
+<a class="r" href="https://convertpolo.com/casestudies/beyond-by-vera/" target="_blank"><img src="../assets/cs/beyondbyvera_big.png" alt=""><div><h3>Beyond by Vera</h3><small>Premium fashion</small></div><p>Slide-out cart and a timed recovery popup.</p><div><span class="k">+53%</span><span>conversion</span></div><span class="go">Case →</span></a>
+</div>
+<div class="more"><span><b>+52%</b>revenue, Sparify</span><span><b>+180%</b>Apply Nows, TimesPro</span></div>
+</div><div class="foot"><img src="../assets/logo.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">08</span></div></section>
+
+<section class="dk s-cta"><div class="in">
+<p class="lab"><span class="ln">08</span><span class="lt2">Next step</span></p>
+<h2>Stop guessing.<i>Start testing.</i></h2>
+<div class="badge"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5"/><defs><path id="c3" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text font-family="Archivo" font-size="12.5" font-weight="700" fill="currentColor" textLength="458" lengthAdjust="spacing"><textPath href="#c3">30 MINUTES · YOUR NUMBERS · NOT OURS · </textPath></text></svg><div class="core" style="color:var(--lime)">30<br>MIN</div></div>
+<div class="g"><div><p>Thirty minutes on sheko.com. We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.</p>
+<div class="btns"><a class="btn lime" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call →</a><a class="btn out" href="#/3">See the tests</a></div></div>
+<div class="card"><img src="../assets/team/ansuya.png" alt=""><div><b>Ansuya Poudel</b><span>Brand &amp; Growth, ConvertPolo</span></div></div></div>
+</div><div class="foot"><img src="../assets/logo_white.svg" alt=""><span>ConvertPolo × SHEKO</span><span class="pg">09</span></div></section>
+
+</div></div>
+<script src="../vendor/reveal.js"></script>
+<script>Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false});</script>
+</body></html>
