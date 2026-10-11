@@ -1,0 +1,274 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>ConvertPolo for SHEKO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../vendor/reset.css"><link rel="stylesheet" href="../vendor/reveal.css">
+<style>
+:root{--k:#000;--w:#fff;--r:#FF2B1C;--g:#8A8A8A;--g2:#5C5C5C;--line:#2A2A2A;--lineL:#DADADA;--pap:#F3F3F1}
+.reveal{font-family:"Inter Tight",Helvetica,Arial,sans-serif;color:var(--k);-webkit-font-smoothing:antialiased}
+.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;overflow:hidden}
+.reveal h1,.reveal h2,.reveal h3{font-family:inherit;text-transform:none;margin:0;letter-spacing:-.035em;font-weight:700;color:inherit}
+.reveal p{margin:0}
+section.dk{background:var(--k);color:var(--w)}section.lt{background:var(--w);color:var(--k)}
+/* system bar */
+.bar{position:absolute;left:0;right:0;top:0;height:60px;display:flex;align-items:center;padding:0 48px;box-sizing:border-box;z-index:5}
+.bar .lg{height:21px;width:auto;display:block}
+.bar nav{margin-left:auto;display:flex;gap:26px;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.bar nav span{color:var(--g);position:relative}
+.dk .bar nav span{color:#6B6B6B}
+.bar nav span.on{color:inherit}
+.dk .bar nav span.on{color:var(--w)}
+.bar nav span.on:before{content:"";position:absolute;left:-12px;top:50%;width:7px;height:7px;margin-top:-3.5px;background:var(--r)}
+.pg{position:absolute;right:96px;bottom:28px;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--g)}
+.pg b{color:inherit}.dk .pg b{color:var(--w)}.lt .pg b{color:var(--k)}
+.tag{position:absolute;left:48px;bottom:28px;font-size:13px;font-weight:500;color:var(--g)}
+.lbl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--g)}
+.red{color:var(--r)}
+.sq{display:inline-block;width:12px;height:12px;background:var(--r);margin-right:10px;vertical-align:1px}
+/* motion */
+.ln{display:block;overflow:hidden;padding-bottom:.04em;margin-bottom:-.04em}
+.ln>span{display:block;transform:translateY(105%)}
+.present .ln>span{animation:up .9s cubic-bezier(.2,.7,.1,1) forwards}
+.present .ln:nth-child(2)>span{animation-delay:.07s}.present .ln:nth-child(3)>span{animation-delay:.14s}.present .ln:nth-child(4)>span{animation-delay:.21s}
+@keyframes up{to{transform:none}}
+.fx{opacity:0}
+.present .fx{animation:fi .8s cubic-bezier(.2,.7,.1,1) forwards;animation-delay:calc(.25s + var(--d,0) * .08s)}
+@keyframes fi{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.wipe{clip-path:inset(0 0 100% 0)}
+.present .wipe{animation:wp 1.1s cubic-bezier(.7,0,.2,1) .2s forwards}
+@keyframes wp{to{clip-path:inset(0 0 0 0)}}
+.print-pdf .ln>span,.print-pdf .fx,.print-pdf .wipe{animation:none!important;transform:none!important;opacity:1!important;clip-path:none!important}
+
+/* 1 cover */
+.cover h1{position:absolute;left:46px;top:118px;font-size:118px;line-height:.9;text-transform:uppercase;letter-spacing:-.045em;font-weight:700}
+.cover .side{position:absolute;left:860px;top:412px;width:372px;font-size:22px;line-height:1.25;font-weight:500;letter-spacing:-.01em}
+.cover .side .red{font-weight:600}
+.cover .meta{position:absolute;left:48px;right:48px;bottom:72px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:1px solid var(--line);padding-top:16px}
+.cover .meta div{font-size:15px;font-weight:500;line-height:1.35}.cover .meta .lbl{display:block;margin-bottom:6px;color:#6B6B6B}
+.cover .meta img{height:22px;filter:brightness(0) invert(1);display:block;margin-top:2px}
+.cover .pair{position:absolute;left:48px;top:516px;display:flex;align-items:center;gap:20px}
+/* 2 saw */
+.saw h2{position:absolute;left:46px;top:104px;font-size:68px;line-height:.92;text-transform:uppercase}
+.saw .ins{position:absolute;left:48px;top:268px;width:520px}
+.saw .ins div{display:grid;grid-template-columns:44px 1fr;border-top:1px solid var(--lineL);padding:14px 0 16px}
+.saw .ins b{font-size:13px;font-weight:700;color:var(--r);padding-top:3px}
+.saw .ins p{font-size:17px;line-height:1.4;font-weight:500;letter-spacing:-.01em}
+.saw .ins div.key p{font-size:19px;font-weight:600;line-height:1.32}
+.saw .shot{position:absolute;left:624px;top:104px;right:0;height:500px;background:var(--pap);overflow:hidden}
+.saw .shot img.d{position:absolute;left:40px;top:40px;width:720px;box-shadow:0 30px 60px rgba(0,0,0,.18)}
+.saw .shot img.m{position:absolute;left:470px;top:150px;width:150px;border-radius:18px;border:6px solid #111;box-shadow:0 30px 50px rgba(0,0,0,.3)}
+.saw .cap{position:absolute;left:624px;top:618px;font-size:13px;color:var(--g);font-weight:500}
+/* 3 findings */
+.fin h2{position:absolute;left:46px;top:96px;font-size:56px;line-height:.95;text-transform:uppercase}
+.fin .intro{position:absolute;left:820px;top:100px;width:400px;font-size:16px;line-height:1.4;font-weight:500;color:var(--g2)}
+.fin .band{position:absolute;left:0;right:0;top:186px;height:150px;background:var(--k);color:var(--w);display:grid;grid-template-columns:repeat(4,1fr);padding:0 48px;gap:24px;box-sizing:border-box}
+.fin .st{padding-top:22px;border-left:1px solid var(--line);padding-left:20px}
+.fin .st:first-child{border-left:0;padding-left:0}
+.fin .st b{display:block;font-size:72px;line-height:.9;font-weight:700;letter-spacing:-.05em}
+.fin .st b i{font-style:normal;color:var(--r)}
+.fin .st span{display:block;font-size:15px;font-weight:500;margin-top:10px}
+.fin .st small{display:block;font-size:11.5px;color:#7a7a7a;margin-top:3px;font-weight:500}
+.fin .pts{position:absolute;left:48px;right:48px;top:366px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.fin .pt{border-top:2px solid var(--k);padding-top:12px}
+.fin .pt .no{font-size:12px;font-weight:700;color:var(--r)}
+.fin .pt h3{font-size:23px;line-height:1.08;margin:8px 0 10px;letter-spacing:-.025em}
+.fin .pt p{font-size:15px;line-height:1.48;color:#333;font-weight:400}
+/* 4 tests */
+.tst h2{position:absolute;left:46px;top:96px;font-size:56px;line-height:.95;text-transform:uppercase}
+.tst .note{position:absolute;left:820px;top:100px;width:400px;font-size:16px;line-height:1.4;color:#9a9a9a;font-weight:500}
+.tst .cols{position:absolute;left:48px;right:48px;top:196px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tst .c{border-top:1px solid #444;padding-top:16px;min-height:340px;position:relative}
+.tst .c .n{font-size:76px;line-height:.85;font-weight:700;letter-spacing:-.05em;color:var(--r)}
+.tst .c h3{font-size:27px;line-height:1.05;margin:16px 0 10px}
+.tst .c p{font-size:18px;line-height:1.42;color:#BDBDBD;max-width:340px}
+.tst .c .mt{margin-top:26px;border-top:1px solid #2a2a2a;padding-top:12px;font-size:15.5px;font-weight:600}.tst .c .mt .lbl{display:block;color:#6f6f6f;margin-bottom:4px}
+.tst .math{position:absolute;left:0;right:0;bottom:0;height:176px;background:var(--r);color:var(--w);padding:28px 48px 0;box-sizing:border-box}
+.tst .math p{font-size:38px;line-height:1.04;font-weight:700;letter-spacing:-.035em;max-width:1000px}
+.tst .math .lbl{color:rgba(255,255,255,.75);display:block;margin-bottom:12px}
+.tst .pg{color:rgba(255,255,255,.8)}
+/* 5 who */
+.who h2{position:absolute;left:46px;top:96px;font-size:64px;line-height:.92;text-transform:uppercase;width:640px}
+.who .facts{position:absolute;left:48px;top:420px;width:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.who .f{border-top:2px solid var(--k);padding:14px 18px 0 0}
+.who .f b{display:block;font-size:46px;line-height:.95;font-weight:700;letter-spacing:-.045em}
+.who .f img{height:30px;display:block;margin:8px 0 8px}
+.who .f span{display:block;font-size:14px;line-height:1.35;font-weight:500;margin-top:10px;color:#333}
+.who .lead{position:absolute;left:48px;top:584px;width:580px;font-size:15px;line-height:1.45;color:var(--g2);font-weight:500}
+.who .team{position:absolute;left:720px;right:48px;top:96px;display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}
+.who .m .ph{height:196px;background:var(--pap);overflow:hidden}
+.who .m img{width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:grayscale(1) contrast(1.05);display:block}
+.who .m b{display:block;font-size:16px;font-weight:700;margin-top:10px;letter-spacing:-.015em}
+.who .m span{display:block;font-size:13px;color:var(--g);font-weight:500;margin-top:1px}
+/* 6 process */
+.pro h2{position:absolute;left:46px;top:96px;font-size:72px;line-height:.92;text-transform:uppercase}
+.pro .note{position:absolute;left:820px;top:104px;width:400px;font-size:16px;line-height:1.4;color:#9a9a9a;font-weight:500}
+.pro .steps{position:absolute;left:48px;right:48px;top:278px;display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+.pro .s{border-left:1px solid #333;padding:0 18px 0 16px;height:340px;position:relative}
+.pro .s:first-child{border-left:0;padding-left:0}
+.pro .s .n{font-size:13px;font-weight:700;color:#6b6b6b}
+.pro .s h3{font-size:27px;line-height:1;margin:14px 0 12px;letter-spacing:-.03em}
+.pro .s p{font-size:16px;line-height:1.42;color:#A8A8A8}
+.pro .s .bar2{position:absolute;left:16px;right:18px;bottom:28px;height:4px;background:#222}
+.pro .s:first-child .bar2{left:0}
+.pro .s .bar2 i{display:block;height:100%;background:var(--r);width:0}
+.present .pro .s .bar2 i, section.present .s .bar2 i{animation:gw .6s ease-out forwards;animation-delay:calc(.4s + var(--d) * .12s)}
+@keyframes gw{to{width:100%}}
+.pro .s.loop h3{color:var(--r)}
+.pro .s .lp{position:absolute;left:16px;bottom:44px;font-size:12px;color:var(--r);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+/* 7 cases */
+.cas h2{position:absolute;left:46px;top:96px;font-size:56px;line-height:.95;text-transform:uppercase}
+.cas .note{position:absolute;left:820px;top:100px;width:400px;font-size:16px;line-height:1.4;color:var(--g2);font-weight:500}
+.cas .grid{position:absolute;left:48px;right:48px;top:196px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px 24px}
+.cas a{text-decoration:none;color:var(--k);display:block}
+.cas .im{height:150px;overflow:hidden;background:var(--pap)}
+.cas .im img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s}
+.cas a:hover .im img{transform:scale(1.04)}
+.cas .t{display:flex;align-items:baseline;gap:12px;padding-top:10px;border-bottom:1px solid var(--lineL);padding-bottom:10px}
+.cas .t b{font-size:38px;line-height:1;font-weight:700;letter-spacing:-.045em;color:var(--r)}
+.cas .t span{font-size:13px;font-weight:600;line-height:1.2}
+.cas .t em{font-style:normal;margin-left:auto;font-size:13px;color:var(--g);font-weight:600;white-space:nowrap}
+/* 8 close */
+.cl h1{position:absolute;left:44px;top:110px;font-size:168px;line-height:.86;text-transform:uppercase;letter-spacing:-.05em}
+.cl h1 .red{color:var(--r)}
+.cl .txt{position:absolute;left:48px;top:462px;width:560px;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+.cl .btn{position:absolute;left:48px;top:590px;display:inline-flex;align-items:center;gap:40px;background:var(--r);color:var(--w);text-decoration:none;font-size:19px;font-weight:700;padding:20px 26px;letter-spacing:-.01em}
+.cl .btn:hover{background:var(--w);color:var(--k)}
+.cl .url{position:absolute;left:330px;top:597px;font-size:14px;color:#8a8a8a;line-height:1.45;font-weight:500}
+.cl .card{position:absolute;left:880px;top:214px;width:352px}
+.cl .card .ph{width:352px;height:320px;overflow:hidden;background:#111}
+.cl .card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(1) contrast(1.05);display:block}
+.cl .card b{display:block;font-size:20px;margin-top:14px;letter-spacing:-.02em}
+.cl .card span{display:block;font-size:14px;color:#8a8a8a;font-weight:500;margin-top:2px}
+.cl .pair{position:absolute;left:880px;top:128px;display:flex;align-items:center;gap:18px}
+.cl .pair img{height:24px;display:block}.cl .pair i{width:1px;height:28px;background:#444}
+.reveal .controls{color:var(--r)}.reveal .progress{color:var(--r);height:3px}
+</style></head>
+<body><div class="reveal"><div class="slides">
+
+<!-- 1 COVER -->
+<section class="dk cover">
+<div class="bar"><img class="lg" src="../assets/logo_white.svg" alt="ConvertPolo"><nav><span class="on">Overview</span><span>Insight</span><span>Findings</span><span>Tests</span><span>Team</span><span>Process</span><span>Work</span><span>Contact</span></nav></div>
+<h1><span class="ln"><span>A conversion</span></span><span class="ln"><span>read of</span></span><span class="ln"><span>sheko.com<span class="red">.</span></span></span></h1>
+<p class="side fx" style="--d:3">Prepared for <span class="red">Dustin Fleck</span>,<br>Co-Founder, SHEKO. Where the next orders are hiding in the traffic you already earn.</p>
+<div class="meta fx" style="--d:5">
+<div><span class="lbl">Client</span><img src="../assets/sheko/logo.png" alt="SHEKO"></div>
+<div><span class="lbl">Prepared for</span>Dustin Fleck<br>Co-Founder</div>
+<div><span class="lbl">Prepared by</span>ConvertPolo<br>CRO, VWO official agency partner</div>
+<div><span class="lbl">Date</span>October 2026<br>sheko.com</div>
+</div>
+<span class="pg"><b>01</b> / 08</span>
+</section>
+
+<!-- 2 SAW -->
+<section class="lt saw">
+<div class="bar"><img class="lg" src="../assets/logo.svg" alt="ConvertPolo"><nav><span>Overview</span><span class="on">Insight</span><span>Findings</span><span>Tests</span><span>Team</span><span>Process</span><span>Work</span><span>Contact</span></nav></div>
+<h2><span class="ln"><span>What we saw</span></span><span class="ln"><span>at SHEKO</span></span></h2>
+<div class="ins">
+<div class="fx" style="--d:1"><b>01</b><p>Nobody buys a shake plan for the shake. They buy the four weeks they hope it gets them through.</p></div>
+<div class="fx" style="--d:2"><b>02</b><p>So the first screen has one job: show that it works for people like them, before they have to decide anything.</p></div>
+<div class="fx key" style="--d:3"><b>03</b><p>Your strongest answer, 11,000,000 meals sold and more than 10,000 Starter-Sets bought in two months, only shows up on the product page. The homepage opens with a question and two equal buttons.</p></div>
+</div>
+<div class="shot wipe"><img class="d" src="../assets/sheko/home.jpg" alt="sheko.com homepage"><img class="m" src="../assets/sheko/m_pdp.jpg" alt="sheko.com mobile product page"></div>
+<p class="cap fx" style="--d:6"><span class="sq"></span>sheko.com, homepage on desktop and Starter-Set page on mobile</p>
+<span class="tag">ConvertPolo for SHEKO</span><span class="pg"><b>02</b> / 08</span>
+</section>
+
+<!-- 3 FINDINGS -->
+<section class="lt fin">
+<div class="bar"><img class="lg" src="../assets/logo.svg" alt="ConvertPolo"><nav><span>Overview</span><span>Insight</span><span class="on">Findings</span><span>Tests</span><span>Team</span><span>Process</span><span>Work</span><span>Contact</span></nav></div>
+<h2><span class="ln"><span>Four findings</span></span></h2>
+<p class="intro fx" style="--d:1">A brand with real demand and real proof. The opportunity is in where that proof sits and how many steps stand before the cart.</p>
+<div class="band fx" style="--d:2">
+<div class="st"><b>386K</b><span>monthly visits</span><small>Source: Similarweb</small></div>
+<div class="st"><b>4.8</b><span>rating from 29,339 reviews</span><small>Source: sheko.com header</small></div>
+<div class="st"><b>11M</b><span>meals sold</span><small>Source: Starter-Set page</small></div>
+<div class="st"><b><i>3</i></b><span>flavour picks before the cart</span><small>Source: Starter-Set page</small></div>
+</div>
+<div class="pts">
+<div class="pt fx" style="--d:3"><span class="no">01</span><h3>Proof sits one click deep</h3><p>The homepage opens on a question, "Balance gewinnen oder Gewicht verlieren?", with two buttons of equal weight. The 11,000,000 meals sold and the 10,000 Starter-Sets in two months only appear after a click. We would test leading with them.</p></div>
+<div class="pt fx" style="--d:4"><span class="no">02</span><h3>Three choices before the cart</h3><p>The Starter-Set asks for three separate flavour picks before it can go in the cart, and on a phone the first screen shows no price and no button. A preselected best seller mix with a simple change option is a fast test.</p></div>
+<div class="pt fx" style="--d:5"><span class="no">03</span><h3>Week four has no next step</h3><p>The Starter-Set is a four week program, yet its page shows no subscribe or reorder option, although SHEKO runs subscriptions (Abo verwalten in the footer). Week four is when the customer decides, so the next step belongs on the page.</p></div>
+<div class="pt fx" style="--d:6"><span class="no">04</span><h3>The discount waits at the bottom</h3><p>The secret discount and the 60 page metabolism guide are offered in a block at the very end of the homepage, after the reviews. Testing the same offer higher up and on product pages could turn more of your visitors into a list.</p></div>
+</div>
+<span class="pg"><b>03</b> / 08</span>
+</section>
+
+<!-- 4 TESTS -->
+<section class="dk tst">
+<div class="bar"><img class="lg" src="../assets/logo_white.svg" alt="ConvertPolo"><nav><span>Overview</span><span>Insight</span><span>Findings</span><span class="on">Tests</span><span>Team</span><span>Process</span><span>Work</span><span>Contact</span></nav></div>
+<h2><span class="ln"><span>Three tests, first<span class="red">.</span></span></span></h2>
+<p class="note fx" style="--d:1">Every idea runs as an A/B test first. Only the winners ship.</p>
+<div class="cols">
+<div class="c fx" style="--d:2"><div class="n">01</div><h3>Proof first homepage</h3><p>Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.</p><div class="mt"><span class="lbl">We measure</span>Clicks to product pages, revenue per visitor</div></div>
+<div class="c fx" style="--d:3"><div class="n">02</div><h3>One tap Starter-Set</h3><p>Preselect the three most popular flavours, put price and button in the first mobile screen.</p><div class="mt"><span class="lbl">We measure</span>Mobile add to cart rate</div></div>
+<div class="c fx" style="--d:4"><div class="n">03</div><h3>The week four bridge</h3><p>A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.</p><div class="mt"><span class="lbl">We measure</span>Repeat orders</div></div>
+</div>
+<div class="math wipe"><span class="lbl">The math</span><p>At 386,000 visits a month, every 0.1 point of conversion rate is about 386 more orders a month, from traffic you already have.</p></div>
+<span class="pg"><b>04</b> / 08</span>
+</section>
+
+<!-- 5 WHO -->
+<section class="lt who">
+<div class="bar"><img class="lg" src="../assets/logo.svg" alt="ConvertPolo"><nav><span>Overview</span><span>Insight</span><span>Findings</span><span>Tests</span><span class="on">Team</span><span>Process</span><span>Work</span><span>Contact</span></nav></div>
+<h2><span class="ln"><span>Conversion is</span></span><span class="ln"><span>all we do<span class="red">.</span></span></span></h2>
+<div class="facts" style="top:322px">
+<div class="f fx" style="--d:2"><b>120+</b><span>online shops under CRO management</span></div>
+<div class="f fx" style="--d:3"><img src="../assets/vwo.png" alt="VWO"><span>Official agency partner of VWO</span></div>
+<div class="f fx" style="--d:4"><b>Month 3</b><span>when results typically start to show</span></div>
+</div>
+<p class="lead fx" style="--d:5;top:520px;font-size:18px;color:#333">Research, design, build and analysis in one team. Every idea is tested before it ships, and every result is read with discipline.</p>
+<div class="team">
+<div class="m fx" style="--d:2"><div class="ph"><img src="../assets/team/anirban.png" alt=""></div><b>Anirban Chakraborty</b><span>Founder &amp; CEO</span></div>
+<div class="m fx" style="--d:3"><div class="ph"><img src="../assets/team/saurabh.png" alt=""></div><b>Saurabh Patwa</b><span>Co-Founder</span></div>
+<div class="m fx" style="--d:4"><div class="ph"><img src="../assets/team/ansuya.png" alt=""></div><b>Ansuya Poudel</b><span>Brand &amp; Growth</span></div>
+<div class="m fx" style="--d:5"><div class="ph"><img src="../assets/team/ankita.png" alt=""></div><b>Ankita Daga</b><span>UX UI Design Lead</span></div>
+</div>
+<span class="tag">ConvertPolo for SHEKO</span><span class="pg"><b>05</b> / 08</span>
+</section>
+
+<!-- 6 PROCESS -->
+<section class="dk pro">
+<div class="bar"><img class="lg" src="../assets/logo_white.svg" alt="ConvertPolo"><nav><span>Overview</span><span>Insight</span><span>Findings</span><span>Tests</span><span>Team</span><span class="on">Process</span><span>Work</span><span>Contact</span></nav></div>
+<h2><span class="ln"><span>One system.</span></span><span class="ln"><span>Six steps<span class="red">.</span></span></span></h2>
+<p class="note fx" style="--d:1">The same disciplined loop for every test, so each result teaches the next one and wins compound over time.</p>
+<div class="steps">
+<div class="s fx" style="--d:2"><span class="n">01</span><h3>Research</h3><p>Analytics, behaviour and the real journey, to find where visitors stall.</p><div class="bar2"><i style="--d:0"></i></div></div>
+<div class="s fx" style="--d:3"><span class="n">02</span><h3>Hypo&shy;theses</h3><p>Every finding becomes a clear, testable idea, ranked by impact.</p><div class="bar2"><i style="--d:1"></i></div></div>
+<div class="s fx" style="--d:4"><span class="n">03</span><h3>Design and build</h3><p>Variants designed and coded to match the brand, pixel for pixel.</p><div class="bar2"><i style="--d:2"></i></div></div>
+<div class="s fx" style="--d:5"><span class="n">04</span><h3>QA and launch</h3><p>Checked across devices and browsers before a single visitor sees it.</p><div class="bar2"><i style="--d:3"></i></div></div>
+<div class="s fx" style="--d:6"><span class="n">05</span><h3>Analyze</h3><p>Read the result honestly. Only the winners ship.</p><div class="bar2"><i style="--d:4"></i></div></div>
+<div class="s fx loop" style="--d:7"><span class="n">06</span><h3>Iterate</h3><p>Learnings feed the next round of research.</p><span class="lp">Back to 01</span><div class="bar2"><i style="--d:5"></i></div></div>
+</div>
+<span class="pg"><b>06</b> / 08</span>
+</section>
+
+<!-- 7 CASES -->
+<section class="lt cas">
+<div class="bar"><img class="lg" src="../assets/logo.svg" alt="ConvertPolo"><nav><span>Overview</span><span>Insight</span><span>Findings</span><span>Tests</span><span>Team</span><span>Process</span><span class="on">Work</span><span>Contact</span></nav></div>
+<h2><span class="ln"><span>Selected results</span></span></h2>
+<p class="note fx" style="--d:1">Measured outcomes from A/B tested programs for online brands we work with.</p>
+<div class="grid">
+<a class="fx" style="--d:2"><div class="im"><img src="../assets/cs/anothersole_big.jpg" alt=""></div><div class="t"><b>+185%</b><span>revenue</span><em>Anothersole</em></div></a>
+<a class="fx" style="--d:3"><div class="im"><img src="../assets/cs/roshambo_big.jpg" alt=""></div><div class="t"><b>+36.13%</b><span>revenue per visitor</span><em>Roshambo</em></div></a>
+<a class="fx" style="--d:4"><div class="im"><img src="../assets/cs/theater_big.jpg" alt=""></div><div class="t"><b>+38%</b><span>revenue per visitor</span><em>Theater</em></div></a>
+<a class="fx" style="--d:5"><div class="im"><img src="../assets/cs/beyondbyvera_big.png" alt=""></div><div class="t"><b>+53%</b><span>conversion</span><em>Beyond by Vera</em></div></a>
+<a class="fx" style="--d:6"><div class="im"><img src="../assets/cs/sparify_big.png" alt=""></div><div class="t"><b>+52%</b><span>revenue</span><em>Sparify</em></div></a>
+<a class="fx" style="--d:7"><div class="im"><img src="../assets/cs/timespro_big.jpg" alt=""></div><div class="t"><b>+180%</b><span>Apply Nows</span><em>TimesPro</em></div></a>
+</div>
+<span class="pg"><b>07</b> / 08</span>
+</section>
+
+<!-- 8 CLOSE -->
+<section class="dk cl">
+<div class="bar"><img class="lg" src="../assets/logo_white.svg" alt="ConvertPolo"><nav><span>Overview</span><span>Insight</span><span>Findings</span><span>Tests</span><span>Team</span><span>Process</span><span>Work</span><span class="on">Contact</span></nav></div>
+<h1><span class="ln"><span>Book</span></span><span class="ln"><span>a call<span class="red">.</span></span></span></h1>
+<p class="txt fx" style="--d:2">Thirty minutes on sheko.com. We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.</p>
+<a class="btn fx" style="--d:3" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call <span>&#8599;</span></a>
+<p class="url fx" style="--d:4">calendly.com/ansuya-convertpolo/30min<br>convertpolo.com</p>
+<div class="pair fx" style="--d:2"><img src="../assets/sheko/logo.png" alt="SHEKO" style="filter:brightness(0) invert(1);height:28px"><i></i><img src="../assets/logo_white.svg" alt="ConvertPolo"></div>
+<div class="card fx" style="--d:4"><div class="ph"><img src="../assets/team/ansuya.png" alt=""></div><b>Ansuya Poudel</b><span>Brand &amp; Growth, ConvertPolo</span></div>
+<span class="pg"><b>08</b> / 08</span>
+</section>
+
+</div></div>
+<script src="../vendor/reveal.js"></script><script>Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false});</script></body></html>

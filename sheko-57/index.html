@@ -1,0 +1,338 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>ConvertPolo for SHEKO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap">
+<link rel="stylesheet" href="../vendor/reset.css"><link rel="stylesheet" href="../vendor/reveal.css">
+<style>
+:root{--ink:#111;--grey:#6e6e6e;--soft:#9a9a9a;--paper:#fff;--night:#1b1b1d;--coral:#FF5B3A;--lilac:#BFA9FF;--mint:#86E3BD;--sun:#FFC93C;--sky:#5C8DFF}
+html,body{background:#1b1b1d}
+.reveal{font-family:'Hanken Grotesk',system-ui,sans-serif;color:var(--ink);font-weight:400}
+.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;overflow:hidden}
+.reveal .slides section *{box-sizing:border-box}
+.reveal h1,.reveal h2,.reveal h3,.reveal p{margin:0;text-transform:none;letter-spacing:normal}
+.reveal a{text-decoration:none;color:inherit}
+.reveal img{max-width:none}
+.abs{position:absolute}
+section.light{background:#fff;color:var(--ink)}
+section.dark{background:var(--night);color:#ececec}
+section.dark::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+section.dark::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.04),rgba(0,0,0,.35) 75%)}
+/* nav, Buck style */
+.mark{position:absolute;left:64px;top:44px;width:88px;height:88px}
+.nav{position:absolute;top:44px;right:64px;display:flex;gap:34px;align-items:center;font-size:17px;font-weight:400;z-index:5}
+.nav .pg{font-variant-numeric:tabular-nums}
+.nav .burger{width:22px;height:9px;border-top:2px solid currentColor;border-bottom:2px solid currentColor}
+.dark .nav{color:#ddd}
+.state{position:absolute;left:250px;top:38px;width:700px;font-size:31px;line-height:1.36;font-weight:300;letter-spacing:-.005em}
+.state.big{font-size:42px;line-height:1.18;letter-spacing:-.015em;width:760px}
+.state .g{color:var(--soft)}
+/* resn label */
+.ulabel{position:absolute;left:0;right:0;text-align:center;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.ulabel span{border-bottom:1.5px solid currentColor;padding-bottom:4px}
+.cap-l{font-size:17px;font-weight:400}
+.cap-t{font-size:17px;font-weight:400;line-height:1.35}
+.cap-g{font-size:15.5px;line-height:1.48;color:var(--grey);font-weight:300}
+.dark .cap-g{color:#a2a2a6}
+/* motion */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.present .rv{opacity:1;transform:none}
+.present .d1{transition-delay:.12s}.present .d2{transition-delay:.24s}.present .d3{transition-delay:.36s}.present .d4{transition-delay:.48s}.present .d5{transition-delay:.6s}.present .d6{transition-delay:.72s}
+@keyframes flo{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(6deg)}}
+@keyframes flo2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.flo{animation:flo 7s ease-in-out infinite}.flo2{animation:flo2 6s ease-in-out infinite}
+.crys{position:absolute;pointer-events:none}
+/* cover */
+.cover-t{position:absolute;left:0;right:0;top:290px;text-align:center;font-size:58px;font-weight:200;line-height:1.12;letter-spacing:-.01em;color:#f2f2f2;z-index:3;text-shadow:0 2px 24px rgba(0,0,0,.85),0 0 6px rgba(0,0,0,.6)}
+.cover-t .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--coral);vertical-align:middle;margin:0 22px 8px}
+.shape{position:absolute;z-index:2}
+/* saw */
+.frame{position:absolute;overflow:hidden}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.phone{position:absolute;border-radius:16px;overflow:hidden;box-shadow:0 24px 40px rgba(40,20,90,.25)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+/* findings */
+.pts{position:absolute;left:64px;top:208px;width:820px;display:grid;grid-template-columns:1fr 1fr;gap:34px 40px}
+.pt .ic{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.12em;color:var(--grey);margin-bottom:12px}
+.pt h3{font-size:21px;font-weight:500;line-height:1.2;margin-bottom:8px;letter-spacing:-.005em}
+.pt p{font-size:14.6px;line-height:1.5;color:var(--grey);font-weight:300}
+/* numbers */
+.nums{position:absolute;left:64px;right:64px;top:486px;display:grid;grid-template-columns:repeat(4,1fr);z-index:3}
+.num{padding:0 22px;border-left:1px solid rgba(255,255,255,.14)}
+.num:first-child{border-left:0;padding-left:0}
+.num b{display:block;font-size:92px;font-weight:200;line-height:1;letter-spacing:-.03em;color:#fff}
+.num span{display:flex;align-items:center;gap:9px;font-size:16px;margin-top:14px;color:#e2e2e2;font-weight:300}
+.num span i{width:9px;height:9px;border-radius:50%;flex:none}
+.num small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#85858a;margin-top:8px;font-weight:600}
+/* tests */
+.tests{position:absolute;left:64px;right:64px;top:196px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tt .ill{height:208px;position:relative;overflow:hidden}
+.tt .ill svg{position:absolute;inset:0;width:100%;height:100%}
+.tt .row{display:grid;grid-template-columns:86px 1fr;margin-top:16px}
+.tt .row .n{font-size:16px}
+.tt h3{font-size:19px;font-weight:500;margin-bottom:6px}
+.tt p{font-size:14.6px;line-height:1.45;color:var(--grey);font-weight:300}
+.tt .met{margin-top:10px;font-size:13.5px;color:var(--ink)}
+.tt .met em{font-style:normal;display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:600;margin-bottom:2px}
+.math{position:absolute;left:64px;right:64px;top:594px;height:92px;background:var(--ink);color:#fff;display:flex;align-items:center;padding:0 34px;gap:30px}
+.math p{font-size:21px;font-weight:300;line-height:1.35;flex:1}
+.math p b{font-weight:500;color:var(--sun)}
+.math small{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#aaa;font-weight:600;width:200px;line-height:1.5}
+/* who */
+.wst{position:absolute;left:64px;top:240px;width:430px}
+.wst .r{display:grid;grid-template-columns:170px 1fr;align-items:center;padding:20px 0;border-top:1px solid #e6e6e6}
+.wst .r:last-child{border-bottom:1px solid #e6e6e6}
+.wst .r b{font-size:40px;font-weight:300;letter-spacing:-.02em;line-height:1}
+.wst .r span{font-size:15px;color:var(--grey);font-weight:300;line-height:1.35}
+.wst .r img{height:30px;vertical-align:middle}
+.team{position:absolute;left:540px;right:64px;top:226px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tm .ph{position:relative;height:220px}
+.tm .ph i{position:absolute;border-radius:50%}
+.tm .ph img{position:absolute;left:8px;top:6px;width:150px;height:196px;mix-blend-mode:multiply;filter:grayscale(1) contrast(1.05)}
+.tm b{display:block;font-size:16px;font-weight:500;margin-top:10px;line-height:1.25}
+.tm span{display:block;font-size:14px;color:var(--grey);font-weight:300;margin-top:3px}
+.logos{position:absolute;left:64px;right:64px;top:586px;height:96px;overflow:hidden;border-top:1px solid #e6e6e6;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logos .track{display:flex;gap:40px;width:max-content;align-items:center;height:96px;animation:mq 60s linear infinite}
+.logos img{height:58px;width:auto;filter:grayscale(1);mix-blend-mode:multiply;opacity:.75}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* process */
+.steps{position:absolute;left:64px;right:64px;top:350px;display:grid;grid-template-columns:repeat(6,1fr);gap:0;z-index:3}
+.stp{padding-right:22px}
+.stp .node{height:56px;display:flex;align-items:center}
+.stp .no{font-size:11px;letter-spacing:.16em;color:#8c8c90;font-weight:600;margin-top:22px}
+.stp b{display:block;font-size:22px;font-weight:300;color:#fff;margin:8px 0 8px;line-height:1.15}
+.stp p{font-size:14px;line-height:1.45;color:#a2a2a6;font-weight:300}
+/* cases */
+.cases{position:absolute;left:64px;right:64px;top:168px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px 24px}
+.case{display:block}
+.case .ci{height:180px;overflow:hidden;background:#f3f1ee}
+.case .ci img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.case:hover .ci img{transform:scale(1.04)}
+.case .cc{display:grid;grid-template-columns:132px 1fr;margin-top:12px;align-items:start}
+.case .cc b{font-size:30px;font-weight:300;letter-spacing:-.02em;line-height:1}
+.case .cc span{display:block;font-size:16px;line-height:1.2}
+.case .cc em{display:block;font-style:normal;font-size:14px;color:var(--grey);font-weight:300;margin-top:3px}
+/* close */
+.cta{display:inline-flex;align-items:center;gap:16px;background:var(--sun);color:#111!important;font-size:19px;font-weight:500;padding:18px 30px 18px 32px;border-radius:999px;transition:transform .3s}
+.cta:hover{transform:translateY(-2px)}
+.cta svg{width:22px;height:22px}
+.reveal .controls{color:#999}
+.reveal .progress{color:var(--coral);height:3px}
+</style></head><body>
+<div class="reveal"><div class="slides">
+
+<!-- 1 COVER -->
+<section class="dark" data-background-color="#1b1b1d">
+  <img class="abs rv" src="../assets/logo_white.svg" alt="ConvertPolo" style="left:64px;top:44px;height:24px;z-index:4">
+  <img class="abs rv" src="../assets/sheko/logo.png" alt="SHEKO" style="right:64px;top:36px;height:40px;filter:brightness(0) invert(1);z-index:4">
+  <div class="ulabel rv d1" style="top:118px;color:#eee;z-index:4"><span>Prepared for Dustin Fleck, Co-Founder, SHEKO</span></div>
+  <svg class="crys" data-seed="7" data-size="520" style="left:380px;top:142px;width:520px;height:520px"></svg>
+  <div class="shape flo" style="left:250px;top:200px"><svg width="64" height="64"><circle cx="32" cy="32" r="30" fill="#FF5B3A"/></svg></div>
+  <div class="shape flo2" style="left:960px;top:170px"><svg width="90" height="46"><path d="M0 46 A45 45 0 0 1 90 46Z" fill="#BFA9FF"/></svg></div>
+  <div class="shape flo" style="left:1000px;top:500px;animation-delay:-2s"><svg width="70" height="70"><rect x="8" y="8" width="54" height="54" rx="4" fill="#86E3BD" transform="rotate(14 35 35)"/></svg></div>
+  <div class="shape flo2" style="left:200px;top:500px;animation-delay:-3s"><svg width="110" height="40"><rect width="110" height="40" rx="20" fill="#FFC93C"/></svg></div>
+  <h1 class="cover-t rv d2">ConvertPolo<span class="dot"></span>SHEKO<br>More orders, same traffic.</h1>
+  <div class="ulabel rv d3" style="top:648px;color:#8a8a8e;font-weight:600;z-index:4">A conversion study of sheko.com</div>
+</section>
+
+<!-- 2 WHAT WE SAW -->
+<section class="light" data-background-color="#ffffff">
+  <svg class="mark rv" viewBox="0 0 90 90"><rect x="4" y="4" width="46" height="82" fill="none" stroke="#111" stroke-width="6"/><circle cx="62" cy="45" r="24" fill="none" stroke="#111" stroke-width="6"/></svg>
+  <div class="nav rv"><span>What we saw</span><span class="pg">02</span><span class="burger"></span></div>
+  <p class="state rv d1">Nobody buys a shake plan for the shake. <span class="g">They buy the four weeks they hope it gets them through.</span></p>
+  <div class="frame rv d2" style="left:64px;top:222px;width:440px;height:300px;background:var(--lilac)">
+    <svg class="flo" style="position:absolute;left:300px;top:24px" width="110" height="110"><circle cx="55" cy="55" r="52" fill="#FF5B3A"/></svg>
+    <svg class="flo2" style="position:absolute;left:22px;top:220px" width="120" height="60"><path d="M0 60 A60 60 0 0 1 120 60Z" fill="#FFC93C"/></svg>
+    <div class="phone" style="left:92px;top:34px;width:132px;height:286px;transform:rotate(-7deg)"><img src="../assets/sheko/m_home.jpg" alt=""></div>
+    <div class="phone" style="left:226px;top:52px;width:132px;height:286px;transform:rotate(5deg)"><img src="../assets/sheko/m_pdp.jpg" alt=""></div>
+  </div>
+  <div class="frame rv d3" style="left:520px;top:222px;width:696px;height:300px"><img src="../assets/sheko/home.jpg" alt="sheko.com homepage"></div>
+  <div class="abs rv d4 cap-l" style="left:64px;top:546px">The first screen</div>
+  <p class="abs rv d4 cap-g" style="left:236px;top:546px;width:268px">So the first screen has one job: show that it works for people like them, before they have to decide anything.</p>
+  <div class="abs rv d5 cap-l" style="left:520px;top:546px">sheko.com</div>
+  <div class="abs rv d5" style="left:700px;top:546px;width:516px"><p class="cap-t">Your strongest answer arrives one click late.</p><p class="cap-g" style="margin-top:6px">11,000,000 meals sold and more than 10,000 Starter-Sets bought in two months only show up on the product page. The homepage opens with a question and two equal buttons.</p></div>
+</section>
+
+<!-- 3 FINDINGS -->
+<section class="light" data-background-color="#ffffff">
+  <svg class="mark rv" viewBox="0 0 90 90"><circle cx="26" cy="45" r="22" fill="none" stroke="#111" stroke-width="6"/><circle cx="64" cy="45" r="22" fill="none" stroke="#111" stroke-width="6"/></svg>
+  <div class="nav rv"><span>Findings</span><span class="pg">03</span><span class="burger"></span></div>
+  <h2 class="state big rv d1">Four moments where a ready buyer <span class="g">meets friction.</span></h2>
+  <div class="pts">
+    <div class="pt rv d2"><div class="ic"><svg width="26" height="26"><circle cx="13" cy="13" r="12" fill="#FF5B3A"/></svg>01</div><h3>Proof sits one click deep</h3><p>The homepage opens on a question, "Balance gewinnen oder Gewicht verlieren?", with two buttons of equal weight. The 11,000,000 meals sold and the 10,000 Starter-Sets in two months only appear after a click. We would test leading with them.</p></div>
+    <div class="pt rv d3"><div class="ic"><svg width="26" height="26"><path d="M1 22 A12 12 0 0 1 25 22Z" fill="#BFA9FF"/></svg>02</div><h3>Three choices before the cart</h3><p>The Starter-Set asks for three separate flavour picks before it can go in the cart, and on a phone the first screen shows no price and no button. A preselected best seller mix with a simple change option is a fast test.</p></div>
+    <div class="pt rv d4"><div class="ic"><svg width="26" height="26"><rect x="2" y="2" width="22" height="22" fill="#86E3BD"/></svg>03</div><h3>Week four has no next step</h3><p>The Starter-Set is a four week program, yet its page shows no subscribe or reorder option, although SHEKO runs subscriptions (Abo verwalten in the footer). Week four is when the customer decides, so the next step belongs on the page.</p></div>
+    <div class="pt rv d5"><div class="ic"><svg width="26" height="26"><path d="M13 1 L25 24 L1 24Z" fill="#FFC93C"/></svg>04</div><h3>The discount waits at the bottom</h3><p>The secret discount and the 60 page metabolism guide are offered in a block at the very end of the homepage, after the reviews. Testing the same offer higher up and on product pages could turn more of your visitors into a list.</p></div>
+  </div>
+  <div class="frame rv d3" style="left:924px;top:208px;width:292px;height:418px;background:var(--mint)">
+    <svg class="flo" style="position:absolute;left:196px;top:300px" width="80" height="80"><circle cx="40" cy="40" r="38" fill="#5C8DFF"/></svg>
+    <div class="phone" style="left:56px;top:28px;width:180px;height:390px;border-radius:20px"><img src="../assets/sheko/m_pdp.jpg" alt="Starter-Set on mobile"></div>
+  </div>
+  <div class="abs rv d4 cap-l" style="left:924px;top:640px;font-size:15px">Starter-Set <span style="color:var(--soft);font-weight:300">on a phone</span></div>
+</section>
+
+<!-- 4 NUMBERS -->
+<section class="dark" data-background-color="#1b1b1d">
+  <img class="abs rv" src="../assets/logo_white.svg" alt="" style="left:64px;top:44px;height:20px;z-index:4;opacity:.85">
+  <div class="nav rv" style="color:#bbb"><span class="pg">04</span><span class="burger"></span></div>
+  <div class="ulabel rv d1" style="top:64px;color:#eee;z-index:4"><span>SHEKO, by the numbers</span></div>
+  <svg class="crys" data-seed="21" data-size="390" style="left:445px;top:96px;width:390px;height:390px;opacity:.9"></svg>
+  <h2 class="cover-t rv d2" style="top:196px;font-size:50px">Loved by buyers.<br>Built at real scale.</h2>
+  <div class="nums">
+    <div class="num rv d2"><b>386K</b><span><i style="background:var(--coral)"></i>monthly visits</span><small>Similarweb</small></div>
+    <div class="num rv d3"><b>4.8</b><span><i style="background:var(--lilac)"></i>rating from 29,339 reviews</span><small>sheko.com header</small></div>
+    <div class="num rv d4"><b>11M</b><span><i style="background:var(--mint)"></i>meals sold</span><small>Starter-Set page</small></div>
+    <div class="num rv d5"><b>3</b><span><i style="background:var(--sun)"></i>flavour picks before the cart</span><small>Starter-Set page</small></div>
+  </div>
+</section>
+
+<!-- 5 TESTS -->
+<section class="light" data-background-color="#ffffff">
+  <svg class="mark rv" viewBox="0 0 90 90"><path d="M4 86 L45 6 L86 86Z" fill="none" stroke="#111" stroke-width="6" stroke-linejoin="miter"/></svg>
+  <div class="nav rv"><span>First tests</span><span class="pg">05</span><span class="burger"></span></div>
+  <h2 class="state big rv d1">Three tests we would run first. <span class="g">Only the winners ship.</span></h2>
+  <div class="tests">
+    <div class="tt rv d2"><div class="ill" style="background:var(--coral)"><svg viewBox="0 0 368 166" preserveAspectRatio="xMidYMid meet">
+      <rect x="104" y="26" width="160" height="150" rx="10" fill="#fff"/><rect x="122" y="48" width="96" height="12" rx="6" fill="#111"/><rect x="122" y="68" width="70" height="8" rx="4" fill="#d9d9d9"/>
+      <g fill="#FFC93C"><path d="M136 100 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z"/><path d="M162 100 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z"/><path d="M188 100 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z"/><path d="M214 100 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z"/><path d="M240 100 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z"/></g>
+      <rect x="122" y="140" width="124" height="20" rx="10" fill="#111"/>
+      <circle class="flo" cx="300" cy="44" r="26" fill="#BFA9FF"/><circle cx="62" cy="128" r="18" fill="#fff" opacity=".35"/></svg></div>
+      <div class="row"><span class="n">Test 01</span><div><h3>Proof first homepage</h3><p>Open with 11,000,000 meals sold and the 4.8 rating, one main button to the Starter-Set.</p><div class="met"><em>Measured by</em>Clicks to product pages, revenue per visitor</div></div></div></div>
+    <div class="tt rv d3"><div class="ill" style="background:var(--lilac)"><svg viewBox="0 0 368 166">
+      <circle cx="112" cy="78" r="34" fill="#FF5B3A"/><circle cx="184" cy="78" r="34" fill="#86E3BD"/><circle cx="256" cy="78" r="34" fill="#FFC93C"/>
+      <g fill="none" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M98 78 l10 10 18 -20"/><path d="M170 78 l10 10 18 -20"/><path d="M242 78 l10 10 18 -20"/></g>
+      <circle cx="304" cy="130" r="12" fill="#111"/><circle cx="304" cy="130" r="24" fill="none" stroke="#111" stroke-width="2" opacity=".5"/><circle cx="304" cy="130" r="38" fill="none" stroke="#111" stroke-width="1.5" opacity=".25"/>
+      <rect x="40" y="132" width="150" height="18" rx="9" fill="#fff"/></svg></div>
+      <div class="row"><span class="n">Test 02</span><div><h3>One tap Starter-Set</h3><p>Preselect the three most popular flavours, put price and button in the first mobile screen.</p><div class="met"><em>Measured by</em>Mobile add to cart rate</div></div></div></div>
+    <div class="tt rv d4"><div class="ill" style="background:var(--mint)"><svg viewBox="0 0 368 166">
+      <g fill="#fff"><rect x="60" y="88" width="46" height="46"/><rect x="124" y="88" width="46" height="46"/><rect x="188" y="88" width="46" height="46"/></g><rect x="252" y="88" width="46" height="46" fill="#111"/>
+      <path d="M275 80 C275 18 83 18 83 80" fill="none" stroke="#111" stroke-width="4" stroke-dasharray="2 9" stroke-linecap="round"/><path d="M73 68 L83 84 L93 68" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle class="flo2" cx="322" cy="40" r="20" fill="#FF5B3A"/></svg></div>
+      <div class="row"><span class="n">Test 03</span><div><h3>The week four bridge</h3><p>A reorder or subscribe option on the Starter-Set page, shown before the four weeks run out.</p><div class="met"><em>Measured by</em>Repeat orders</div></div></div></div>
+  </div>
+  <div class="math rv d5"><small>The math at SHEKO scale</small><p>At 386,000 visits a month, every 0.1 point of conversion rate is about <b>386 more orders a month</b>, from traffic you already have.</p></div>
+</section>
+
+<!-- 6 WHO WE ARE -->
+<section class="light" data-background-color="#ffffff">
+  <svg class="mark rv" viewBox="0 0 90 90"><path d="M4 45 A41 41 0 0 1 86 45Z" fill="none" stroke="#111" stroke-width="6" stroke-linejoin="miter"/><path d="M4 52 A41 34 0 0 0 86 52" fill="none" stroke="#111" stroke-width="6"/></svg>
+  <div class="nav rv"><span>Who we are</span><span class="pg">06</span><span class="burger"></span></div>
+  <p class="state rv d1">ConvertPolo only does conversion. <span class="g">We run the whole experimentation program for e-commerce and D2C brands, as an extension of your team.</span></p>
+  <div class="wst">
+    <div class="r rv d2"><b>120+</b><span>online shops under CRO management</span></div>
+    <div class="r rv d3"><b><img src="../assets/vwo.png" alt="VWO"></b><span>Official agency partner</span></div>
+    <div class="r rv d4"><b>Month 3</b><span>when test results typically start to show</span></div>
+  </div>
+  <div class="team">
+    <div class="tm rv d2"><div class="ph"><i style="left:112px;top:150px;width:60px;height:60px;background:var(--coral)"></i><img src="../assets/team/anirban.png" alt=""></div><b>Anirban Chakraborty</b><span>Founder &amp; CEO</span></div>
+    <div class="tm rv d3"><div class="ph"><i style="left:-8px;top:154px;width:52px;height:52px;background:var(--lilac)"></i><img src="../assets/team/saurabh.png" alt=""></div><b>Saurabh Patwa</b><span>Co-Founder</span></div>
+    <div class="tm rv d4"><div class="ph"><i style="left:118px;top:-4px;width:48px;height:48px;background:var(--mint)"></i><img src="../assets/team/ansuya.png" alt=""></div><b>Ansuya Poudel</b><span>Brand &amp; Growth</span></div>
+    <div class="tm rv d5"><div class="ph"><i style="left:-6px;top:0;width:52px;height:52px;background:var(--sun)"></i><img src="../assets/team/ankita.png" alt=""></div><b>Ankita Daga</b><span>UX UI Design Lead</span></div>
+  </div>
+  <div class="logos rv d6"><div class="track" id="trk"></div></div>
+</section>
+
+<!-- 7 PROCESS -->
+<section class="dark" data-background-color="#1b1b1d">
+  <img class="abs rv" src="../assets/logo_white.svg" alt="" style="left:64px;top:44px;height:20px;z-index:4;opacity:.85">
+  <div class="nav rv" style="color:#bbb"><span>How we work</span><span class="pg">07</span><span class="burger"></span></div>
+  <div class="ulabel rv d1" style="top:116px;color:#eee;z-index:4"><span>Fully managed</span></div>
+  <h2 class="cover-t rv d2" style="top:158px;font-size:48px">You approve.<br>We run everything else.</h2>
+  <svg class="abs rv d4" style="left:64px;top:300px;z-index:2" width="1152" height="330" viewBox="0 0 1152 330">
+    <line x1="28" y1="78" x2="1000" y2="78" stroke="rgba(255,255,255,.22)" stroke-width="1"/>
+    <path d="M1020 258 C1020 292 1006 300 980 300 L60 300 C34 300 28 290 28 262" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-dasharray="3 7"/>
+    <path d="M18 270 L28 254 L38 270" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+    <rect x="430" y="290" width="260" height="20" fill="#1d1d1f"/>
+    <text x="560" y="304" fill="#8c8c90" font-size="11" letter-spacing="2" font-family="Hanken Grotesk" font-weight="600" text-anchor="middle">ONE TEST AFTER THE NEXT</text>
+  </svg>
+  <div class="steps">
+    <div class="stp rv d2"><div class="node"><svg width="56" height="56"><circle cx="28" cy="28" r="27" fill="#FF5B3A"/></svg></div><div class="no">01</div><b>Research</b><p>Analytics, session recordings, voice of customer</p></div>
+    <div class="stp rv d3"><div class="node"><svg width="56" height="56"><path d="M0 52 A28 28 0 0 1 56 52Z" fill="#BFA9FF"/></svg></div><div class="no">02</div><b>Hypotheses</b><p>Ranked by expected impact and speed</p></div>
+    <div class="stp rv d3"><div class="node"><svg width="56" height="56"><rect x="3" y="3" width="50" height="50" fill="#86E3BD"/></svg></div><div class="no">03</div><b>Design and build</b><p>Our designers and developers, not your roadmap</p></div>
+    <div class="stp rv d4"><div class="node"><svg width="56" height="56"><path d="M28 2 L54 54 L2 54Z" fill="#FFC93C"/></svg></div><div class="no">04</div><b>QA and launch</b><p>Every test verified before a visitor sees it</p></div>
+    <div class="stp rv d5"><div class="node"><svg width="56" height="56"><path d="M28 2 L54 28 L28 54 L2 28Z" fill="#5C8DFF"/></svg></div><div class="no">05</div><b>Analyze</b><p>Statistical significance, not gut feeling</p></div>
+    <div class="stp rv d6"><div class="node"><svg width="56" height="56"><circle cx="28" cy="28" r="23" fill="none" stroke="#fff" stroke-width="8"/></svg></div><div class="no">06</div><b>Iterate</b><p>Winners roll out, learnings feed the next test</p></div>
+  </div>
+</section>
+
+<!-- 8 CASES -->
+<section class="light" data-background-color="#ffffff">
+  <svg class="mark rv" viewBox="0 0 90 90"><rect x="4" y="4" width="40" height="40" fill="none" stroke="#111" stroke-width="6"/><path d="M50 86 A40 40 0 0 1 86 46 L86 86Z" fill="none" stroke="#111" stroke-width="6"/><circle cx="24" cy="66" r="18" fill="none" stroke="#111" stroke-width="6"/></svg>
+  <div class="nav rv"><span>Work</span><span class="pg">08</span><span class="burger"></span></div>
+  <h2 class="state big rv d1">Selected work. <span class="g">Measured, not guessed.</span></h2>
+  <div class="cases">
+    <a class="case rv d2" href="https://convertpolo.com/casestudies/anothersole-product-discovery-improvement/" target="_blank"><div class="ci"><img src="../assets/cs/anothersole_big.jpg" alt=""></div><div class="cc"><b>+185%</b><div><span>Anothersole</span><em>Revenue</em></div></div></a>
+    <a class="case rv d3" href="https://convertpolo.com/casestudies/how-roshambo-boosted-revenue-per-visitor-by-36-13-with-targeted-ux-experiments/" target="_blank"><div class="ci"><img src="../assets/cs/roshambo_big.jpg" alt=""></div><div class="cc"><b>+36.13%</b><div><span>Roshambo</span><em>Revenue per visitor</em></div></div></a>
+    <a class="case rv d4" href="https://convertpolo.com/casestudies/theater-mobile-experience-redesign/" target="_blank"><div class="ci"><img src="../assets/cs/theater_big.jpg" alt=""></div><div class="cc"><b>+38%</b><div><span>Theater</span><em>Revenue per visitor</em></div></div></a>
+    <a class="case rv d3" href="https://convertpolo.com/casestudies/beyond-by-vera/" target="_blank"><div class="ci"><img src="../assets/cs/beyondbyvera_big.png" alt=""></div><div class="cc"><b>+53%</b><div><span>Beyond by Vera</span><em>Conversion</em></div></div></a>
+    <div class="case rv d4"><div class="ci" style="background:#f1efea"><img src="../assets/cs/sparify_big.png" alt="" style="object-position:center 30%"></div><div class="cc"><b>+52%</b><div><span>Sparify</span><em>Revenue</em></div></div></div>
+    <div class="case rv d5"><div class="ci"><img src="../assets/cs/timespro_big.jpg" alt=""></div><div class="cc"><b>+180%</b><div><span>TimesPro</span><em>Apply Nows</em></div></div></div>
+  </div>
+</section>
+
+<!-- 9 CLOSE -->
+<section class="dark" data-background-color="#1b1b1d">
+  <img class="abs rv" src="../assets/logo_white.svg" alt="ConvertPolo" style="left:64px;top:44px;height:22px;z-index:4">
+  <img class="abs rv" src="../assets/sheko/logo.png" alt="SHEKO" style="right:64px;top:36px;height:38px;filter:brightness(0) invert(1);z-index:4">
+  <svg class="crys" data-seed="3" data-size="600" style="left:640px;top:70px;width:600px;height:600px"></svg>
+  <div class="shape flo" style="left:1130px;top:520px"><svg width="58" height="58"><circle cx="29" cy="29" r="27" fill="#FF5B3A"/></svg></div>
+  <div class="shape flo2" style="left:700px;top:150px"><svg width="80" height="40"><path d="M0 40 A40 40 0 0 1 80 40Z" fill="#BFA9FF"/></svg></div>
+  <div class="abs rv d1" style="left:64px;top:150px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#eee;z-index:4"><span style="border-bottom:1.5px solid #eee;padding-bottom:4px">Next step</span></div>
+  <h2 class="abs rv d2" style="left:64px;top:196px;width:640px;font-size:66px;font-weight:200;line-height:1.06;letter-spacing:-.02em;color:#f4f4f4;z-index:4">Thirty minutes<br>on sheko.com.</h2>
+  <p class="abs rv d3" style="left:64px;top:356px;width:520px;font-size:20px;font-weight:300;line-height:1.5;color:#b4b4b8;z-index:4">We walk you through what we saw and the first three tests we would run, on your real numbers instead of ours.</p>
+  <a class="abs rv d4 cta" style="left:64px;top:478px;z-index:4" href="https://calendly.com/ansuya-convertpolo/30min" target="_blank">Book a call<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+  <div class="abs rv d5" style="left:64px;top:590px;display:flex;align-items:center;gap:16px;z-index:4">
+    <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;background:var(--mint)"><img src="../assets/team/ansuya.png" alt="Ansuya Poudel" style="width:64px;height:84px;object-fit:cover;object-position:top;mix-blend-mode:multiply;filter:grayscale(1)"></div>
+    <div><div style="font-size:17px;color:#f2f2f2">Ansuya Poudel</div><div style="font-size:14px;color:#9a9a9e;font-weight:300;margin-top:2px">Brand &amp; Growth, ConvertPolo</div></div>
+  </div>
+</section>
+
+</div></div>
+<script src="../vendor/reveal.js"></script>
+<script>
+// client logo strip
+(function(){var t=document.getElementById('trk'),ids=[1,2,3,4,5,6,7,8,9,11,12,14,15,16,17,18,19],h='';
+for(var k=0;k<2;k++)ids.forEach(function(i){h+='<img src="../assets/clients/l'+i+'.png" alt="">'});t.innerHTML=h})();
+// faceted crystal, chromatic edges
+(function(){
+var NS='http://www.w3.org/2000/svg',PAL=['#FF5B3A','#BFA9FF','#86E3BD','#FFC93C','#5C8DFF'];
+function rnd(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
+function build(seed){
+ var r=rnd(seed),t=(1+Math.sqrt(5))/2,V=[[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],[t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]],
+ F=[[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+ function nz(v){var l=Math.hypot(v[0],v[1],v[2]);return [v[0]/l,v[1]/l,v[2]/l]}
+ V=V.map(nz);var cache={};
+ function mid(a,b){var k=a<b?a+'_'+b:b+'_'+a;if(cache[k]==null){var p=V[a],q=V[b];V.push(nz([(p[0]+q[0])/2,(p[1]+q[1])/2,(p[2]+q[2])/2]));cache[k]=V.length-1}return cache[k]}
+ var G=[];F.forEach(function(f){var a=mid(f[0],f[1]),b=mid(f[1],f[2]),c=mid(f[2],f[0]);G.push([f[0],a,c],[f[1],b,a],[f[2],c,b],[a,b,c])});
+ V=V.map(function(v){var s=.8+r()*.4;return [v[0]*s,v[1]*s*1.12,v[2]*s]});
+ var faces=G.map(function(f){var x=r();return {f:f,keep:x>.38,col:x>.93?PAL[Math.floor(r()*5)]:null}});
+ return {V:V,faces:faces};
+}
+function draw(svg,m,ang){
+ var S=+svg.getAttribute('data-size'),R=S*.36,c=S/2,ca=Math.cos(ang),sa=Math.sin(ang),cb=Math.cos(.45),sb=Math.sin(.45);
+ var P=m.V.map(function(v){var x=v[0]*ca+v[2]*sa,z=-v[0]*sa+v[2]*ca,y=v[1];var y2=y*cb-z*sb,z2=y*sb+z*cb;return [x,y2,z2]});
+ var L=[-.45,-.6,.66],out=[];
+ m.faces.forEach(function(o){if(!o.keep)return;var a=P[o.f[0]],b=P[o.f[1]],d=P[o.f[2]];
+  var u=[b[0]-a[0],b[1]-a[1],b[2]-a[2]],w=[d[0]-a[0],d[1]-a[1],d[2]-a[2]];
+  var n=[u[1]*w[2]-u[2]*w[1],u[2]*w[0]-u[0]*w[2],u[0]*w[1]-u[1]*w[0]],nl=Math.hypot(n[0],n[1],n[2]);n=[n[0]/nl,n[1]/nl,n[2]/nl];
+  var cz=(a[2]+b[2]+d[2])/3; if(n[0]*a[0]+n[1]*a[1]+n[2]*a[2]<0)n=[-n[0],-n[1],-n[2]];
+  var front=n[2]>0,lam=Math.max(0,n[0]*L[0]+n[1]*L[1]+n[2]*L[2]),g=Math.round(22+225*Math.pow(lam,3.2));
+  if(!front)g=Math.round(g*.35+10);
+  var fill=o.col&&front?o.col:'rgb('+g+','+g+','+(g+3)+')',op=o.col&&front?.35+lam*.65:1;
+  out.push({z:cz,d:'M'+[a,b,d].map(function(p){return (c+p[0]*R).toFixed(1)+' '+(c+p[1]*R).toFixed(1)}).join('L')+'Z',fill:fill,op:op,front:front})});
+ out.sort(function(p,q){return p.z-q.z});
+ var g=svg.querySelector('g.body');g.innerHTML=out.map(function(o){return '<path d="'+o.d+'" fill="'+o.fill+'" fill-opacity="'+o.op.toFixed(2)+'" stroke="'+(o.front?'rgba(255,255,255,.18)':'rgba(255,255,255,.05)')+'" stroke-width=".8"/>'}).join('');
+}
+var items=[];
+document.querySelectorAll('svg.crys').forEach(function(svg,i){
+ var S=+svg.getAttribute('data-size'),fid='ca'+i;svg.setAttribute('viewBox','0 0 '+S+' '+S);
+ svg.innerHTML='<defs><filter id="'+fid+'" x="-10%" y="-10%" width="120%" height="120%"><feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="r"/><feOffset in="r" dx="-2.5" result="r2"/><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" result="gb"/><feOffset in="gb" dx="2.5" result="gb2"/><feBlend in="r2" in2="gb2" mode="screen"/></filter></defs><g class="body" filter="url(#'+fid+')"></g>';
+ items.push({svg:svg,m:build(+svg.getAttribute('data-seed')),a:+svg.getAttribute('data-seed')*.37});
+});
+var t0=performance.now();
+function loop(t){var dt=(t-t0)/1000;items.forEach(function(it){draw(it.svg,it.m,it.a+dt*.12)});requestAnimationFrame(loop)}
+items.forEach(function(it){draw(it.svg,it.m,it.a)});requestAnimationFrame(loop);
+})();
+Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false});
+</script>
+</body></html>
