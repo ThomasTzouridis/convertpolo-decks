@@ -297,6 +297,25 @@ function fitAll(){
 }
 fitAll();
 Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false,view:'scroll',scrollProgress:'auto'});
+/* one slide per scroll gesture, eased */
+(function(){
+  var st=document.createElement('style');st.textContent='.scroll-snap-point{scroll-snap-stop:always}';document.head.appendChild(st);
+  var vp=document.querySelector('.reveal-viewport')||document.documentElement,busy=false,last=0,DUR=850;
+  function pages(){return Array.prototype.slice.call(document.querySelectorAll('.scroll-page'));}
+  function go(dir){
+    var ps=pages();if(!ps.length)return;var y=vp.scrollTop,cur=0,best=1e9;
+    ps.forEach(function(p,i){var d=Math.abs(p.offsetTop-y);if(d<best){best=d;cur=i;}});
+    var nx=Math.max(0,Math.min(ps.length-1,cur+dir));if(nx===cur)return;
+    var from=y,to=ps[nx].offsetTop,t0=performance.now();busy=true;vp.style.scrollSnapType='none';
+    (function step(now){var k=Math.min(1,(now-t0)/DUR),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+      vp.scrollTop=from+(to-from)*e;if(k<1)requestAnimationFrame(step);else{vp.style.scrollSnapType='';setTimeout(function(){busy=false;},150);}})(t0);
+  }
+  vp.addEventListener('wheel',function(ev){
+    if(!document.querySelector('.reveal-scroll'))return;
+    ev.preventDefault();var now=performance.now(),gap=now-last;last=now;
+    if(busy||gap<220||Math.abs(ev.deltaY)<4)return;go(ev.deltaY>0?1:-1);
+  },{passive:false});
+})();
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){fitAll();Reveal.layout();});
 </script>
 </body></html>
