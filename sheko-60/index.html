@@ -6,7 +6,7 @@
 <style>
 :root{--black:#0D0D0D;--bone:#ECE8E0;--coral:#FF4B2B;--sun:#FFD02E;--grey:#8D8A84;--line:rgba(255,255,255,.16)}
 .reveal{font-family:'Inter Tight',sans-serif;color:#fff;background:var(--black)}
-.reveal .slides section{text-align:left;padding:0;width:1280px;height:720px;box-sizing:border-box;overflow:hidden;line-height:1.3}
+.reveal .slides section{text-align:left;padding:0;width:100%;height:100%;box-sizing:border-box;overflow:hidden;line-height:1.3}
 .reveal h1,.reveal h2,.reveal h3,.reveal p{margin:0;text-transform:none;font-weight:inherit}
 .reveal a{color:inherit;text-decoration:none}
 .dark{background:var(--black);color:#fff}.light{background:var(--bone);color:var(--black)}.hot{background:var(--coral);color:var(--black)}
@@ -296,7 +296,11 @@ function fitAll(){
   box.remove();
 }
 fitAll();
-Reveal.initialize({width:1280,height:720,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false,view:'scroll',scrollProgress:'auto'});
+/* stretch the slide to the window's shape so it always fills the screen */
+function dims(){var a=window.innerWidth/window.innerHeight;
+  return a>=16/9?{width:Math.round(720*a),height:720}:{width:1280,height:Math.round(Math.min(1280/a,840))};}
+var rz;window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){Reveal.configure(dims());},150);});
+Reveal.initialize({width:dims().width,height:dims().height,margin:0,hash:true,controls:true,progress:true,transition:'slide',center:false,view:'scroll',scrollProgress:'auto'});
 /* one slide per scroll gesture, eased */
 (function(){
   var st=document.createElement('style');st.textContent='.scroll-snap-point{scroll-snap-stop:always}';document.head.appendChild(st);
