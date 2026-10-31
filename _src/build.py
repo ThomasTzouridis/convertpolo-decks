@@ -16,6 +16,10 @@ CLIENTS = ["l1","l2","l11","l12","l14","l15","l16","l17","l18","l19","l113"]
 def foot(): return '<div class="foot"><img src="../assets/logo.svg" alt="ConvertPolo"><span>convertpolo.com</span></div>'
 def slide(inner, cls=""): return f'<section class="{cls}"><div class="in">{inner}</div>{foot()}</section>'
 
+if spec.get("lead_logo"):                        # logos come from tools/logo.py only: sharp, wide, dark on the white slide
+    sys.path.insert(0, str(SRC / "tools")); from logo import guard
+    _bad = guard(str(REPO / "assets" / f"{slug}_{spec['lead_logo']}"), "#ffffff")
+    assert not _bad, f"{sys.argv[1]}: lead_logo is {_bad}. Run: py tools/logo.py {slug} \"{company}\" {spec.get('website', '<website>')} --bg #ffffff --out ../assets --name {slug}_logo.png --spec {sys.argv[1]} --key lead_logo --value logo.png"
 lead_logo = f'<img src="../assets/{slug}_{spec["lead_logo"]}" alt="{esc(company)}" class="leadlogo">' if spec.get("lead_logo") else f'<span class="leadname">{esc(company)}</span>'
 shot = f'<img src="../assets/{slug}_{spec["shot"]}" alt="">' if spec.get("shot") else ""
 
